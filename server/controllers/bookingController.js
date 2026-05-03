@@ -12,10 +12,12 @@ export const createBooking = async (req, res) => {
     const farmer = req.user; // from JWT
     const booking = await Booking.create({
       farmerId: farmer.id,
+      farmerEmail: farmer.email,
       farmerName: farmer.name,
       farmerPhone: farmer.phone || "N/A",
       ownerId: listing.ownerEmail,
       ownerName: listing.ownerName,
+      ownerPhone: listing.phone || "N/A",
       listingId: listing._id.toString(),
       listingTitle: listing.title,
       listingType: listing.type,
@@ -105,5 +107,36 @@ export const createListing = async (req, res) => {
     res.status(201).json({ listing });
   } catch (err) {
     res.status(500).json({ msg: "Failed to create listing", error: err.message });
+  }
+};
+
+// ─── UPDATE LISTING ───────────────────────────────────────────────────────────
+export const updateListing = async (req, res) => {
+  try {
+    const listing = await Listing.findOne({
+      _id: req.params.id,
+      ownerEmail: req.user.email,
+    });
+
+    if (!listing) {
+      return res.status(404).json({ msg: "Listing not found" });
+    }
+
+    Object.assign(listing, req.body);
+    await listing.save();
+
+    await ActivityLog.create({
+      userId: req.user.id,
+      userEmail: req.user.email,
+      userName: req.user.name,
+      userRole: req.user.role,
+      action: "update_listing",
+      description: `${req.user.name} updated listing "${listing.title}"`,
+      metadata: { listingId: listing._id, listingType: listing.type, available: listing.available },
+    });
+
+    res.json({ listing });
+  } catch (err) {
+    res.status(500).json({ msg: "Failed to update listing", error: err.message });
   }
 };

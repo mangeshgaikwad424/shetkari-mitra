@@ -2,6 +2,7 @@ import express from "express";
 import mongoose from "mongoose";
 import cors from "cors";
 import dotenv from "dotenv";
+import emailService from "./utils/emailService.js";
 
 // ─────────────────────────────────────────
 // ✅ LOAD ENV FIRST (VERY IMPORTANT)
@@ -14,6 +15,11 @@ dotenv.config();
 console.log("📧 EMAIL_USER:", process.env.EMAIL_USER ? "Loaded ✅" : "Missing ❌");
 console.log("🔑 EMAIL_PASS:", process.env.EMAIL_PASS ? "Loaded ✅" : "Missing ❌");
 console.log("🌐 FRONTEND_URL:", process.env.FRONTEND_URL);
+
+// ─────────────────────────────────────────
+// ✅ INITIALIZE EMAIL SERVICE
+// ─────────────────────────────────────────
+emailService.initializeEmailService();
 
 // ─────────────────────────────────────────
 // ✅ CREATE APP

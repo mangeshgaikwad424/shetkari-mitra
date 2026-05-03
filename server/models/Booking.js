@@ -2,10 +2,12 @@ import mongoose from "mongoose";
 
 const bookingSchema = new mongoose.Schema({
   farmerId: { type: String, required: true },
+  farmerEmail: { type: String, default: "" },
   farmerName: { type: String, required: true },
   farmerPhone: { type: String, default: "N/A" },
   ownerId: { type: String, required: true },
   ownerName: { type: String, required: true },
+  ownerPhone: { type: String, default: "N/A" },
   listingId: { type: String, required: true },
   listingTitle: { type: String, required: true },
   listingType: { type: String, enum: ["tractor", "labour"], required: true },

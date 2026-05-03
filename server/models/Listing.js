@@ -7,6 +7,7 @@ const listingSchema = new mongoose.Schema({
   title: { type: String, required: true },
   location: { type: String, required: true },
   price: { type: String, required: true },
+  image: { type: String, default: "" },
   available: { type: Boolean, default: true },
   rating: { type: Number, default: 0 },
   phone: { type: String },

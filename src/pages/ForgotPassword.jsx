@@ -28,7 +28,7 @@ export default function ForgotPassword() {
 
   const [loading, setLoading] = useState(false);
 
-  // ─── EMAIL FLOW ───────────────────────────────────────────────────────────────
+  // ─── EMAIL FLOW — Send OTP ────────────────────────────────────────────────────
   const handleEmailSubmit = async (e) => {
     e.preventDefault();
     setEmailError("");
@@ -37,9 +37,26 @@ export default function ForgotPassword() {
     setLoading(true);
     try {
       const res = await api.post("/auth/forgot-password", { email });
-      setStep("done");
+      setStep("otp");
     } catch (err) {
       setEmailError(err.response?.data?.msg || "Cannot connect to server. Make sure your backend is running.");
+    }
+    setLoading(false);
+  };
+
+  // ─── EMAIL FLOW — Verify OTP ──────────────────────────────────────────────────
+  const handleEmailOtpVerify = async (e) => {
+    e.preventDefault();
+    setOtpError("");
+    if (enteredOtp.length < 6) { setOtpError(isMr ? "6 अंकी OTP टाका" : "Enter the 6-digit OTP"); return; }
+
+    setLoading(true);
+    try {
+      const res = await api.post("/auth/verify-email-otp", { email, otp: enteredOtp });
+      setResetToken(res.data.resetToken);
+      setStep("newpass");
+    } catch (err) {
+      setOtpError(err.response?.data?.msg || "Cannot connect to server. Make sure your backend is running.");
     }
     setLoading(false);
   };
@@ -63,7 +80,7 @@ export default function ForgotPassword() {
     setLoading(false);
   };
 
-  // ─── PHONE FLOW — Verify OTP ──────────────────────────────────────────────────
+  // ─── VERIFY OTP (Email or Phone) ──────────────────────────────────────────────
   const handleOtpVerify = async (e) => {
     e.preventDefault();
     setOtpError("");
@@ -71,7 +88,12 @@ export default function ForgotPassword() {
 
     setLoading(true);
     try {
-      const res = await api.post("/auth/verify-otp", { phone, otp: enteredOtp });
+      let res;
+      if (method === "email") {
+        res = await api.post("/auth/verify-email-otp", { email, otp: enteredOtp });
+      } else {
+        res = await api.post("/auth/verify-otp", { phone, otp: enteredOtp });
+      }
       setResetToken(res.data.resetToken);
       setStep("newpass");
     } catch (err) {
@@ -156,7 +178,7 @@ export default function ForgotPassword() {
               {method === "email" && (
                 <form onSubmit={handleEmailSubmit} className="space-y-5">
                   <div className="bg-amber-50 border border-amber-200 rounded-xl p-4 text-sm text-amber-700">
-                    🔐 {isMr ? "फक्त नोंदणीकृत ईमेलवरच रीसेट लिंक पाठवली जाईल." : "Reset link will only be sent to your registered email."}
+                    🔐 {isMr ? "फक्त नोंदणीकृत ईमेलवरच OTP पाठवली जाईल." : "OTP will be sent only to your registered email."}
                   </div>
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-1">
@@ -173,7 +195,7 @@ export default function ForgotPassword() {
                   </div>
                   <button type="submit" disabled={loading || !email}
                     className="w-full bg-green-600 text-white py-3 rounded-xl font-semibold hover:bg-green-700 transition-colors disabled:opacity-60">
-                    {loading ? (isMr ? "पाठवत आहे..." : "Sending...") : (isMr ? "रीसेट लिंक पाठवा" : "Send Reset Link")}
+                    {loading ? (isMr ? "पाठवत आहे..." : "Sending...") : (isMr ? "OTP पाठवा" : "Send OTP")}
                   </button>
                 </form>
               )}
@@ -218,7 +240,9 @@ export default function ForgotPassword() {
                 <div className="text-4xl mb-2">📲</div>
                 <p className="text-gray-700 font-semibold">{isMr ? "OTP पडताळणी" : "OTP Verification"}</p>
                 <p className="text-sm text-gray-500 mt-1">
-                  {isMr ? `+91 ${phone} वर SMS पाठवला आहे` : `OTP sent via SMS to +91 ${phone}`}
+                  {method === "email"
+                    ? (isMr ? `${email} वर OTP पाठवला आहे` : `OTP sent to ${email}`)
+                    : (isMr ? `+91 ${phone} वर SMS पाठवला आहे` : `OTP sent via SMS to +91 ${phone}`)}
                 </p>
               </div>
               <div>

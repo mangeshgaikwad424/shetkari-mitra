@@ -13,6 +13,8 @@ const userSchema = new mongoose.Schema({
   },
   resetToken: String,
   resetTokenExpire: Date,
+  emailOtp: String,
+  emailOtpExpire: Date,
 }, { timestamps: true });
 
 export default mongoose.model("User", userSchema);

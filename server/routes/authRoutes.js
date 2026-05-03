@@ -1,9 +1,17 @@
 import express from "express";
+
 import {
-  register, login, getMe,
-  forgotPassword, resetPassword,
-  sendPhoneOtp, verifyPhoneOtp,
+  register,
+  login,
+  getMe,
+  forgotPassword,
+  resetPassword,
+  sendPhoneOtp,
+  verifyPhoneOtp,
+  verifyEmailOtp,
+  sendEmailOtp,
 } from "../controllers/authController.js";
+
 import { protect } from "../middleware/authMiddleware.js";
 
 const router = express.Router();
@@ -11,9 +19,16 @@ const router = express.Router();
 router.post("/register", register);
 router.post("/login", login);
 router.get("/me", protect, getMe);
+
 router.post("/forgot-password", forgotPassword);
+
+// ── Email OTP login (no password reset) ──────────────────────────────────────
+router.post("/send-email-otp", sendEmailOtp);
+router.post("/verify-email-otp", verifyEmailOtp);
+
 router.post("/reset-password/:token", resetPassword);
+
 router.post("/send-otp", sendPhoneOtp);
 router.post("/verify-otp", verifyPhoneOtp);
 
-export default router;
+export default router;
