@@ -43,6 +43,8 @@ body {
   color: var(--text);
   background: var(--bg);
   transition: background 0.2s, color 0.2s;
+  overflow-x: hidden;
+  width: 100%;
 }
 
 /* ─── CONTAINER ─────────────────────────────────────────────────────────────── */
@@ -50,6 +52,7 @@ body {
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 16px;
+  width: 100%;
 }
 
 /* ─── HEADINGS ──────────────────────────────────────────────────────────────── */
@@ -71,27 +74,328 @@ h1, h2, h3 {
 .btn-secondary { background: white; border: 1px solid var(--border); }
 .btn-secondary:hover { background: #f9fafb; }
 
+/* ══════════════════════════════════════════════════════════════════
+   MOBILE RESPONSIVE — ALL PAGES
+══════════════════════════════════════════════════════════════════ */
+
+/* ─── GLOBAL MOBILE BASE ────────────────────────────────────────────────────── */
+@media (max-width: 768px) {
+  html, body {
+    overflow-x: hidden;
+    width: 100%;
+  }
+
+  /* Fix any element going outside screen */
+  * {
+    max-width: 100vw;
+  }
+
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+
+  /* ─── TYPOGRAPHY SCALE DOWN ── */
+  h1 { font-size: 1.75rem !important; line-height: 1.2 !important; }
+  h2 { font-size: 1.4rem !important; }
+  h3 { font-size: 1.15rem !important; }
+
+  /* ─── CONTAINER PADDING ── */
+  .container {
+    padding: 0 12px !important;
+  }
+
+  /* ─── NAVBAR ── */
+  nav {
+    padding: 8px 12px !important;
+  }
+
+  /* ─── HERO SECTION ── */
+  section {
+    padding-left: 12px !important;
+    padding-right: 12px !important;
+  }
+
+  /* ─── GRIDS → SINGLE COLUMN ── */
+  .grid-cols-2,
+  .grid-cols-3,
+  .grid-cols-4 {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* ─── FLEX ROW → COLUMN ── */
+  .flex-row {
+    flex-direction: column !important;
+  }
+
+  /* ─── BUTTONS FULL WIDTH ── */
+  .btn {
+    width: 100% !important;
+    text-align: center !important;
+  }
+
+  /* ─── CARDS ── */
+  .rounded-xl, .rounded-2xl {
+    border-radius: 12px !important;
+  }
+
+  /* ─── TABLES SCROLL ── */
+  table {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+    width: 100%;
+  }
+
+  /* ─── MODALS FULL SCREEN ── */
+  .modal, [class*="modal"] {
+    width: 95vw !important;
+    max-width: 95vw !important;
+    margin: 10px auto !important;
+  }
+
+  /* ─── PADDING FIXES ── */
+  [class*="p-8"] { padding: 16px !important; }
+  [class*="p-10"] { padding: 16px !important; }
+  [class*="p-12"] { padding: 20px !important; }
+  [class*="px-8"] { padding-left: 16px !important; padding-right: 16px !important; }
+  [class*="py-16"] { padding-top: 40px !important; padding-bottom: 40px !important; }
+  [class*="py-20"] { padding-top: 48px !important; padding-bottom: 48px !important; }
+  [class*="py-24"] { padding-top: 48px !important; padding-bottom: 48px !important; }
+
+  /* ─── GAP FIXES ── */
+  [class*="gap-8"] { gap: 16px !important; }
+  [class*="gap-12"] { gap: 20px !important; }
+}
+
 /* ─── DASHBOARD MOBILE SIDEBAR ──────────────────────────────────────────────── */
 @media (max-width: 768px) {
-  /* Hide sidebar off-screen by default on mobile */
   .farmer-sidebar {
     transform: translateX(-100%);
     transition: transform 0.25s ease;
+    position: fixed !important;
+    z-index: 50 !important;
+    height: 100vh !important;
+    top: 0 !important;
+    left: 0 !important;
   }
 
-  /* Show sidebar when open */
   .farmer-sidebar.sidebar-open {
     transform: translateX(0) !important;
   }
 
-  /* Main content takes full width on mobile */
   .farmer-main {
     margin-left: 0 !important;
+    width: 100% !important;
   }
 
-  /* Show hamburger button */
   .sidebar-hamburger {
     display: block !important;
+  }
+
+  /* Dashboard cards stack */
+  .dashboard-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* Dashboard stats row */
+  .stats-row {
+    flex-direction: column !important;
+    gap: 12px !important;
+  }
+}
+
+/* ─── HOME PAGE ─────────────────────────────────────────────────────────────── */
+@media (max-width: 768px) {
+  /* Hero section */
+  .hero-section {
+    min-height: auto !important;
+    padding: 40px 16px !important;
+    text-align: center !important;
+  }
+
+  .hero-section img {
+    width: 100% !important;
+    margin-top: 24px !important;
+  }
+
+  /* Stats bar */
+  .stats-bar {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 12px !important;
+  }
+
+  /* Features grid */
+  .features-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* CTA buttons stack */
+  .cta-buttons {
+    flex-direction: column !important;
+    gap: 12px !important;
+    align-items: stretch !important;
+  }
+}
+
+/* ─── LOGIN & REGISTER PAGES ─────────────────────────────────────────────────── */
+@media (max-width: 768px) {
+  /* Auth card full width */
+  .auth-card,
+  form.bg-white,
+  div.bg-white.rounded-2xl,
+  div.bg-white.rounded-xl {
+    width: 95vw !important;
+    max-width: 95vw !important;
+    padding: 20px 16px !important;
+    margin: 16px auto !important;
+  }
+
+  /* Role buttons 2x2 grid */
+  .role-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+
+  /* Input fields full width */
+  input, select, textarea {
+    width: 100% !important;
+    font-size: 16px !important; /* prevents iOS zoom */
+  }
+}
+
+/* ─── TRACTOR / LABOUR / MARKETPLACE PAGES ──────────────────────────────────── */
+@media (max-width: 768px) {
+  /* Filter sidebar goes on top */
+  .filter-sidebar {
+    width: 100% !important;
+    margin-bottom: 16px !important;
+  }
+
+  /* Product/tractor cards grid */
+  .cards-grid {
+    grid-template-columns: 1fr !important;
+    gap: 16px !important;
+  }
+
+  /* Card images */
+  .card-image {
+    height: 180px !important;
+    object-fit: cover !important;
+  }
+
+  /* Search bar full width */
+  .search-bar {
+    width: 100% !important;
+  }
+}
+
+/* ─── MANDI PRICES PAGE ──────────────────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .mandi-table {
+    font-size: 13px !important;
+  }
+
+  .mandi-filters {
+    flex-direction: column !important;
+    gap: 8px !important;
+  }
+
+  .mandi-filters select,
+  .mandi-filters input {
+    width: 100% !important;
+  }
+}
+
+/* ─── WEATHER PAGE ───────────────────────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .weather-hero {
+    padding: 24px 16px !important;
+    text-align: center !important;
+  }
+
+  .forecast-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 10px !important;
+  }
+}
+
+/* ─── SCHEMES PAGE ───────────────────────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .schemes-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  .scheme-card {
+    padding: 16px !important;
+  }
+}
+
+/* ─── MESSAGES PAGE ──────────────────────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .messages-container {
+    flex-direction: column !important;
+    height: auto !important;
+  }
+
+  .messages-list {
+    width: 100% !important;
+    height: 200px !important;
+    overflow-y: auto !important;
+  }
+
+  .messages-chat {
+    width: 100% !important;
+    height: calc(100vh - 280px) !important;
+  }
+}
+
+/* ─── COMMUNITY PAGE ─────────────────────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .community-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  .post-card {
+    padding: 14px !important;
+  }
+}
+
+/* ─── FORMS GENERAL ──────────────────────────────────────────────────────────── */
+@media (max-width: 768px) {
+  form {
+    width: 100% !important;
+  }
+
+  /* Prevent iOS zoom on focus */
+  input[type="text"],
+  input[type="email"],
+  input[type="password"],
+  input[type="number"],
+  input[type="tel"],
+  select,
+  textarea {
+    font-size: 16px !important;
+  }
+
+  /* Submit buttons */
+  button[type="submit"] {
+    width: 100% !important;
+    padding: 14px !important;
+  }
+}
+
+/* ─── TABLET (768px - 1024px) ───────────────────────────────────────────────── */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .grid-cols-4 {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+
+  .grid-cols-3 {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+
+  .container {
+    padding: 0 24px !important;
   }
 }
 
@@ -104,24 +408,13 @@ h1, h2, h3 {
 :root.dark .border-gray-200 { border-color: var(--border) !important; }
 
 /* ─── SCROLLBAR ─────────────────────────────────────────────────────────────── */
-::-webkit-scrollbar {
-  width: 6px;
-}
-::-webkit-scrollbar-track {
-  background: transparent;
-}
-::-webkit-scrollbar-thumb {
-  background: #d1d5db;
-  border-radius: 4px;
-}
-:root.dark ::-webkit-scrollbar-thumb {
-  background: #475569;
-}
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: #d1d5db; border-radius: 4px; }
+:root.dark ::-webkit-scrollbar-thumb { background: #475569; }
 
 /* ─── SMOOTH TRANSITIONS ────────────────────────────────────────────────────── */
-a, button {
-  transition: all 0.15s ease;
-}
+a, button { transition: all 0.15s ease; }
 
 /* ─── ANIMATIONS ─────────────────────────────────────────────────────────────── */
 @keyframes fadeIn {
@@ -134,14 +427,287 @@ a, button {
   to { opacity: 1; transform: translateX(0); }
 }
 
-.animate-fade-in {
-  animation: fadeIn 0.3s ease forwards;
-}
-.animate-slide-in {
-  animation: slideIn 0.3s ease forwards;
-}
+.animate-fade-in { animation: fadeIn 0.3s ease forwards; }
+.animate-slide-in { animation: slideIn 0.3s ease forwards; }
 
 /* ─── PRINT STYLES ──────────────────────────────────────────────────────────── */
 @media print {
   nav, aside, .no-print { display: none !important; }
+}
+
+
+/* ══════════════════════════════════════════════════════════════════
+   HOVER EFFECTS & ANIMATIONS
+══════════════════════════════════════════════════════════════════ */
+
+/* ─── CARD HOVER EFFECTS ────────────────────────────────────────────────────── */
+.hover-card {
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+.hover-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.12);
+}
+
+/* Feature cards, tractor cards, scheme cards etc */
+[class*="rounded-xl"],
+[class*="rounded-2xl"] {
+  transition: transform 0.22s ease, box-shadow 0.22s ease, border-color 0.22s ease;
+}
+[class*="rounded-xl"]:hover,
+[class*="rounded-2xl"]:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(22, 163, 74, 0.12);
+}
+
+/* ─── BUTTON HOVER EFFECTS ──────────────────────────────────────────────────── */
+button, .btn, a[class*="bg-"] {
+  transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.2s ease, opacity 0.2s ease;
+}
+button:hover, .btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.15);
+}
+button:active, .btn:active {
+  transform: translateY(0px);
+}
+
+/* Green primary buttons */
+button[class*="bg-green"],
+a[class*="bg-green"] {
+  transition: background 0.2s ease, transform 0.15s ease, box-shadow 0.2s ease;
+}
+button[class*="bg-green"]:hover,
+a[class*="bg-green"]:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(22, 163, 74, 0.35);
+}
+
+/* ─── NAVBAR LINK HOVER ─────────────────────────────────────────────────────── */
+nav a {
+  position: relative;
+  transition: color 0.2s ease;
+}
+nav a::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: #16a34a;
+  transition: width 0.25s ease;
+}
+nav a:hover::after {
+  width: 100%;
+}
+
+/* ─── IMAGE HOVER ZOOM ──────────────────────────────────────────────────────── */
+.img-zoom {
+  overflow: hidden;
+  border-radius: 12px;
+}
+.img-zoom img {
+  transition: transform 0.4s ease;
+}
+.img-zoom:hover img {
+  transform: scale(1.05);
+}
+
+/* ─── INPUT FOCUS EFFECTS ───────────────────────────────────────────────────── */
+input, select, textarea {
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+input:focus, select:focus, textarea:focus {
+  outline: none;
+  border-color: #16a34a !important;
+  box-shadow: 0 0 0 3px rgba(22, 163, 74, 0.15);
+}
+
+/* ─── LINK HOVER ────────────────────────────────────────────────────────────── */
+a {
+  transition: color 0.2s ease, opacity 0.2s ease;
+}
+a:hover {
+  opacity: 0.85;
+}
+
+/* ══════════════════════════════════════════════════════════════════
+   KEYFRAME ANIMATIONS
+══════════════════════════════════════════════════════════════════ */
+
+/* Fade up — for page sections */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Fade in simple */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* Slide in from left */
+@keyframes slideInLeft {
+  from { opacity: 0; transform: translateX(-40px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+/* Slide in from right */
+@keyframes slideInRight {
+  from { opacity: 0; transform: translateX(40px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+/* Scale pop */
+@keyframes scalePop {
+  0%   { opacity: 0; transform: scale(0.85); }
+  70%  { transform: scale(1.04); }
+  100% { opacity: 1; transform: scale(1); }
+}
+
+/* Bounce gentle */
+@keyframes bounceGentle {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(-8px); }
+}
+
+/* Pulse glow — for badges/tags */
+@keyframes pulseGlow {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(22, 163, 74, 0.4); }
+  50%       { box-shadow: 0 0 0 8px rgba(22, 163, 74, 0); }
+}
+
+/* Shimmer — for loading skeletons */
+@keyframes shimmer {
+  0%   { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+/* Float — for hero image */
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50%       { transform: translateY(-12px); }
+}
+
+/* Spin slow — for loader */
+@keyframes spinSlow {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+/* ─── ANIMATION UTILITY CLASSES ─────────────────────────────────────────────── */
+.animate-fade-up       { animation: fadeUp 0.6s ease forwards; }
+.animate-fade-in       { animation: fadeIn 0.4s ease forwards; }
+.animate-slide-left    { animation: slideInLeft 0.5s ease forwards; }
+.animate-slide-right   { animation: slideInRight 0.5s ease forwards; }
+.animate-scale-pop     { animation: scalePop 0.4s ease forwards; }
+.animate-bounce-gentle { animation: bounceGentle 2.5s ease-in-out infinite; }
+.animate-pulse-glow    { animation: pulseGlow 2s ease-in-out infinite; }
+.animate-float         { animation: float 3s ease-in-out infinite; }
+.animate-spin-slow     { animation: spinSlow 3s linear infinite; }
+
+/* ─── ANIMATION DELAYS ──────────────────────────────────────────────────────── */
+.delay-100 { animation-delay: 0.1s; }
+.delay-200 { animation-delay: 0.2s; }
+.delay-300 { animation-delay: 0.3s; }
+.delay-400 { animation-delay: 0.4s; }
+.delay-500 { animation-delay: 0.5s; }
+.delay-700 { animation-delay: 0.7s; }
+
+/* ─── STAGGERED CHILDREN ────────────────────────────────────────────────────── */
+.stagger-children > *:nth-child(1) { animation-delay: 0.0s; }
+.stagger-children > *:nth-child(2) { animation-delay: 0.1s; }
+.stagger-children > *:nth-child(3) { animation-delay: 0.2s; }
+.stagger-children > *:nth-child(4) { animation-delay: 0.3s; }
+.stagger-children > *:nth-child(5) { animation-delay: 0.4s; }
+.stagger-children > *:nth-child(6) { animation-delay: 0.5s; }
+
+/* ─── SCROLL REVEAL (add class via JS IntersectionObserver) ─────────────────── */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ─── HERO IMAGE FLOAT ──────────────────────────────────────────────────────── */
+.hero-img {
+  animation: float 4s ease-in-out infinite;
+}
+
+/* ─── SHIMMER SKELETON ──────────────────────────────────────────────────────── */
+.skeleton {
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+  border-radius: 8px;
+}
+
+/* ─── BADGE PULSE ───────────────────────────────────────────────────────────── */
+.badge-live {
+  animation: pulseGlow 2s ease-in-out infinite;
+  background: #16a34a;
+  color: white;
+  border-radius: 999px;
+  padding: 2px 10px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+/* ─── TAG HOVER ─────────────────────────────────────────────────────────────── */
+[class*="tag"], [class*="badge"] {
+  transition: transform 0.2s ease;
+}
+[class*="tag"]:hover, [class*="badge"]:hover {
+  transform: scale(1.08);
+}
+
+/* ─── SIDEBAR MENU ITEMS ────────────────────────────────────────────────────── */
+aside a, aside button {
+  transition: background 0.18s ease, color 0.18s ease, padding-left 0.18s ease;
+  border-radius: 8px;
+}
+aside a:hover, aside button:hover {
+  padding-left: 4px;
+  background: rgba(22, 163, 74, 0.08);
+  color: #16a34a;
+}
+
+/* ─── TABLE ROW HOVER ───────────────────────────────────────────────────────── */
+tr {
+  transition: background 0.15s ease;
+}
+tr:hover {
+  background: rgba(22, 163, 74, 0.05) !important;
+}
+
+/* ─── NOTIFICATION BELL SHAKE ───────────────────────────────────────────────── */
+@keyframes bellShake {
+  0%, 100% { transform: rotate(0); }
+  20%       { transform: rotate(12deg); }
+  40%       { transform: rotate(-10deg); }
+  60%       { transform: rotate(8deg); }
+  80%       { transform: rotate(-6deg); }
+}
+.bell-shake {
+  animation: bellShake 0.6s ease;
+}
+
+/* ─── PAGE TRANSITION ───────────────────────────────────────────────────────── */
+.page-enter {
+  animation: fadeUp 0.4s ease forwards;
+}
+
+/* ─── DARK MODE HOVER FIXES ─────────────────────────────────────────────────── */
+:root.dark [class*="rounded-xl"]:hover,
+:root.dark [class*="rounded-2xl"]:hover {
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+}
+:root.dark button:hover {
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4);
 }
