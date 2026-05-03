@@ -302,7 +302,9 @@ export default function Navbar() {
           {/* Language toggle */}
           <button
             onClick={toggleLang}
-            className="border border-gray-200 px-3 py-1.5 rounded-full text-sm text-gray-600 hover:border-green-400 hover:text-green-600 hover:bg-green-50 transition-all duration-200"
+              className="border border-gray-200 px-2 py-1 sm:px-3 sm:py-1.5 rounded-full text-xs sm:text-sm text-gray-600 hover:border-green-400 hover:text-green-600 hover:bg-green-50 transition-all duration-200 flex items-center gap-1"
+
+            // className="border border-gray-200 px-3 py-1.5 rounded-full text-sm text-gray-600 hover:border-green-400 hover:text-green-600 hover:bg-green-50 transition-all duration-200"
           >
             🌐 {lang === "en" ? "मराठी" : "English"}
           </button>
