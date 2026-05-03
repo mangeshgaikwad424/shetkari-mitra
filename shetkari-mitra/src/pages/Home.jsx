@@ -225,12 +225,14 @@ export default function Home() {
             </h1>
             <p style={{ fontSize: 18, color: "#4b5563", lineHeight: 1.7, marginBottom: 32, maxWidth: 480 }}>{t.desc}</p>
             <div style={{ display: "flex", gap: 14, flexWrap: "wrap", marginBottom: 24 }}>
-              <button onClick={() => navigate("/register")}
-                style={{ background: "linear-gradient(135deg,#16a34a,#15803d)", color: "#fff", padding: "14px 32px", borderRadius: 50, fontWeight: 700, fontSize: 16, border: "none", cursor: "pointer", boxShadow: "0 4px 20px rgba(22,163,74,0.4)", transition: "transform 0.15s" }}
-                onMouseOver={e => e.target.style.transform = "scale(1.04)"}
-                onMouseOut={e => e.target.style.transform = "scale(1)"}>
-                {t.btn1} →
-              </button>
+              {!user && (
+                <button onClick={() => navigate("/register")}
+                  style={{ background: "linear-gradient(135deg,#16a34a,#15803d)", color: "#fff", padding: "14px 32px", borderRadius: 50, fontWeight: 700, fontSize: 16, border: "none", cursor: "pointer", boxShadow: "0 4px 20px rgba(22,163,74,0.4)", transition: "transform 0.15s" }}
+                  onMouseOver={e => e.target.style.transform = "scale(1.04)"}
+                  onMouseOut={e => e.target.style.transform = "scale(1)"}>
+                  {t.btn1} →
+                </button>
+              )}
               <button onClick={() => navigate("/marketplace")}
                 style={{ background: "#fff", color: "#374151", padding: "14px 28px", borderRadius: 50, fontWeight: 600, fontSize: 15, border: "2px solid #e5e7eb", cursor: "pointer", transition: "all 0.15s" }}
                 onMouseOver={e => { e.target.style.borderColor = "#16a34a"; e.target.style.color = "#16a34a"; }}
@@ -416,10 +418,12 @@ export default function Home() {
           {lang === "mr" ? "तंत्रज्ञानाचा वापर करून अधिक उत्पादन घेणाऱ्या आणि अधिक कमाई करणाऱ्या लाखो भारतीय शेतकऱ्यांमध्ये सामील व्हा." : "Join millions of Indian farmers using technology to grow more, earn more, and waste less."}
         </p>
         <div style={{ display: "flex", gap: 16, justifyContent: "center", flexWrap: "wrap" }}>
-          <button onClick={() => navigate("/register")}
-            style={{ background: "#fff", color: "#16a34a", padding: "16px 40px", borderRadius: 50, fontWeight: 800, fontSize: 17, border: "none", cursor: "pointer", boxShadow: "0 4px 20px rgba(0,0,0,0.2)" }}>
-            {t.ctaBtn} 🌱
-          </button>
+          {!user && (
+            <button onClick={() => navigate("/register")}
+              style={{ background: "#fff", color: "#16a34a", padding: "16px 40px", borderRadius: 50, fontWeight: 800, fontSize: 17, border: "none", cursor: "pointer", boxShadow: "0 4px 20px rgba(0,0,0,0.2)" }}>
+              {t.ctaBtn} 🌱
+            </button>
+          )}
           <button onClick={() => navigate("/mandi")}
             style={{ background: "rgba(255,255,255,0.15)", color: "#fff", padding: "16px 32px", borderRadius: 50, fontWeight: 600, fontSize: 16, border: "2px solid rgba(255,255,255,0.3)", cursor: "pointer" }}>
             📊 {lang === "mr" ? "थेट बाजारभाव पाहा" : "View Live Mandi Prices"}
