@@ -152,14 +152,14 @@ export default function Tractor() {
       <Navbar />
 
       {/* HERO */}
-      <div style={{ background:"linear-gradient(135deg,#f0fdf4,#dcfce7,#bbf7d0)", borderBottom:"1px solid #d1fae5", padding:"36px 24px" }}>
-        <div style={{ maxWidth:1280, margin:"0 auto", display:"flex", alignItems:"center", justifyContent:"space-between" }}>
-          <div>
-            <h1 style={{ fontSize:36, fontWeight:900, color:"#111827", marginBottom:8 }}>{t.hero}</h1>
-            <p style={{ fontSize:15, color:"#4b5563", marginBottom:20, whiteSpace:"pre-line" }}>{t.heroSub}</p>
-            <button style={{ background:"#16a34a", color:"#fff", border:"none", borderRadius:10, padding:"12px 22px", fontSize:14, fontWeight:700, cursor:"pointer" }}>{t.addBtn}</button>
+      <div style={{ background:"linear-gradient(135deg,#f0fdf4,#dcfce7,#bbf7d0)", borderBottom:"1px solid #d1fae5", padding:"24px 16px" }}>
+        <div style={{ maxWidth:1280, margin:"0 auto", display:"flex", alignItems:"center", justifyContent:"space-between", flexWrap:"wrap", gap:12 }}>
+          <div style={{ flex:1, minWidth:0 }}>
+            <h1 style={{ fontSize:"clamp(22px,5vw,36px)", fontWeight:900, color:"#111827", marginBottom:8 }}>{t.hero}</h1>
+            <p style={{ fontSize:14, color:"#4b5563", marginBottom:16, whiteSpace:"pre-line" }}>{t.heroSub}</p>
+            <button style={{ background:"#16a34a", color:"#fff", border:"none", borderRadius:10, padding:"11px 20px", fontSize:14, fontWeight:700, cursor:"pointer" }}>{t.addBtn}</button>
           </div>
-          <div style={{ width:200, height:130, background:"rgba(22,163,74,0.1)", borderRadius:16, display:"flex", alignItems:"center", justifyContent:"center", fontSize:80 }}>🚜</div>
+          <div style={{ width:120, height:90, background:"rgba(22,163,74,0.1)", borderRadius:16, display:"flex", alignItems:"center", justifyContent:"center", fontSize:56, flexShrink:0 }}>🚜</div>
         </div>
       </div>
 
@@ -180,12 +180,12 @@ export default function Tractor() {
         </div>
       </div>
 
-      <div style={{ maxWidth:1280, margin:"0 auto", padding:"24px", display:"grid", gridTemplateColumns:"1fr 280px", gap:24 }}>
+      <div style={{ maxWidth:1280, margin:"0 auto", padding:"16px", display:"grid", gridTemplateColumns:"1fr", gap:20 }} className="tractor-main-grid">
         <div>
           {/* CATEGORY PILLS */}
-          <div style={{ display:"flex", gap:8, marginBottom:24, flexWrap:"wrap" }}>
+          <div style={{ display:"flex", gap:8, marginBottom:20, overflowX:"auto", paddingBottom:4, WebkitOverflowScrolling:"touch" }}>
             {t.cats.map((c, i) => (
-              <button key={i} onClick={() => setActiveCat(i)} style={{ display:"flex", flexDirection:"column", alignItems:"center", gap:4, padding:"9px 14px", borderRadius:12, border:activeCat===i?"2px solid #16a34a":"1px solid #e5e7eb", background:activeCat===i?"#f0fdf4":"#fff", cursor:"pointer", fontSize:12, fontWeight:activeCat===i?700:500, color:activeCat===i?"#16a34a":"#6b7280" }}>
+              <button key={i} onClick={() => setActiveCat(i)} style={{ display:"flex", flexDirection:"column", alignItems:"center", gap:4, padding:"9px 14px", borderRadius:12, border:activeCat===i?"2px solid #16a34a":"1px solid #e5e7eb", background:activeCat===i?"#f0fdf4":"#fff", cursor:"pointer", fontSize:12, fontWeight:activeCat===i?700:500, color:activeCat===i?"#16a34a":"#6b7280", flexShrink:0 }}>
                 <span style={{ fontSize:20 }}>{c.icon}</span><span>{c.label}</span>
               </button>
             ))}
@@ -193,19 +193,19 @@ export default function Tractor() {
 
           {/* TRACTORS */}
           <div style={{ display:"flex", justifyContent:"space-between", alignItems:"center", marginBottom:14 }}>
-            <h2 style={{ fontSize:18, fontWeight:800, color:"#111827" }}>{t.popularTitle}</h2>
+            <h2 style={{ fontSize:18, fontWeight:800, color:"#111827", margin:0 }}>{t.popularTitle}</h2>
             <a href="#" style={{ fontSize:13, color:"#16a34a", fontWeight:600, textDecoration:"none" }}>{t.viewAll}</a>
           </div>
-          <div style={{ display:"grid", gridTemplateColumns:"repeat(4,1fr)", gap:14, marginBottom:28 }}>
+          <div style={{ display:"grid", gridTemplateColumns:"repeat(2,1fr)", gap:12, marginBottom:24 }} className="tractor-cards-grid">
             {t.tractors.map(item => <Card key={item.id} item={item} emoji="🚜" />)}
           </div>
 
           {/* TOOLS */}
           <div style={{ display:"flex", justifyContent:"space-between", alignItems:"center", marginBottom:14 }}>
-            <h2 style={{ fontSize:18, fontWeight:800, color:"#111827" }}>{t.toolsTitle}</h2>
+            <h2 style={{ fontSize:18, fontWeight:800, color:"#111827", margin:0 }}>{t.toolsTitle}</h2>
             <a href="#" style={{ fontSize:13, color:"#16a34a", fontWeight:600, textDecoration:"none" }}>{t.viewAll}</a>
           </div>
-          <div style={{ display:"grid", gridTemplateColumns:"repeat(4,1fr)", gap:14 }}>
+          <div style={{ display:"grid", gridTemplateColumns:"repeat(2,1fr)", gap:12 }} className="tractor-cards-grid">
             {t.tools.map(item => <Card key={item.id} item={item} emoji="🔧" />)}
           </div>
         </div>
@@ -274,6 +274,15 @@ export default function Tractor() {
           </div>
         </div>
       )}
+      <style>{`
+        @media (min-width: 768px) {
+          .tractor-main-grid { grid-template-columns: 1fr 280px !important; }
+          .tractor-cards-grid { grid-template-columns: repeat(4, 1fr) !important; }
+        }
+        @media (max-width: 480px) {
+          .tractor-cards-grid { grid-template-columns: 1fr !important; }
+        }
+      `}</style>
     </div>
   );
 }

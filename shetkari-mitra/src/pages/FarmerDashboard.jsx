@@ -231,8 +231,6 @@ export default function FarmerDashboard() {
     { id: "bookings", label: copy.myBookings, icon: "📅" },
     { id: "messages", label: copy.messages, icon: "💬" },
     { id: "earnings", label: copy.earnings, icon: "💰" },
-    { id: "schemes", label: copy.schemes, icon: "📋" },
-    { id: "crop", label: copy.cropDoctor, icon: "🌿" },
     { id: "notifications", label: copy.notifications, icon: "🔔" },
     { id: "profile", label: copy.profile, icon: "👤" },
     { id: "settings", label: copy.settings, icon: "⚙️" },
@@ -580,13 +578,7 @@ export default function FarmerDashboard() {
           {NAV.map((item) => (
             <button
               key={item.id}
-              onClick={() =>
-                item.id === "schemes"
-                  ? navigate("/schemes")
-                  : item.id === "crop"
-                    ? navigate("/crop")
-                    : setActiveTab(item.id)
-              }
+              onClick={() => setActiveTab(item.id)}
               style={{
                 width: "100%",
                 display: "flex",
@@ -1027,7 +1019,7 @@ export default function FarmerDashboard() {
                 )}
               </div>
 
-              <div style={{ display: "grid", gridTemplateColumns: "320px 1fr", gap: 16, minHeight: 560 }}>
+              <div style={{ display: "grid", gridTemplateColumns: "1fr", gap: 16, minHeight: 400 }} className="farmer-messages-grid">
                 <div style={{ background: "#fff", borderRadius: 16, border: "1px solid #e5e7eb", display: "flex", flexDirection: "column", overflow: "hidden" }}>
                   <div style={{ padding: "16px 16px 0" }}>
                     <div style={{ fontSize: 12, fontWeight: 700, color: "#6b7280", marginBottom: 10 }}>{copy.allContacts}</div>
@@ -1398,6 +1390,15 @@ export default function FarmerDashboard() {
           </div>
         </div>
       )}
+      <style>{`
+        @media (min-width: 768px) {
+          .farmer-messages-grid { grid-template-columns: 280px 1fr !important; }
+        }
+        @media (max-width: 640px) {
+          .farmer-main { padding: 0 !important; }
+          .farmer-main header { padding: 10px 12px !important; }
+        }
+      `}</style>
     </div>
   );
 }

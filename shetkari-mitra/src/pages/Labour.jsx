@@ -77,7 +77,7 @@ export default function Labour() {
               {lbl("+ Post a Job", "+ काम पोस्ट करा")}
             </button>
           </div>
-          <div style={{ width:180, height:120, background:"rgba(22,163,74,0.1)", borderRadius:16, display:"flex", alignItems:"center", justifyContent:"center", fontSize:64 }}>👨‍🌾</div>
+          <div style={{ width:140, height:100, background:"rgba(22,163,74,0.1)", borderRadius:16, display:"flex", alignItems:"center", justifyContent:"center", fontSize:56, flexShrink:0 }} className="labour-hero-illustration">👨‍🌾</div>
         </div>
       </div>
 
@@ -127,7 +127,7 @@ export default function Labour() {
       </div>
 
       {/* MAIN GRID */}
-      <div style={{ maxWidth:1280, margin:"0 auto", padding:"20px 24px 40px", display:"grid", gridTemplateColumns:"1fr 280px", gap:24 }}>
+      <div style={{ maxWidth:1280, margin:"0 auto", padding:"16px 16px 40px", display:"grid", gridTemplateColumns:"1fr", gap:20 }} className="labour-main-grid">
         {/* WORKERS LIST */}
         <div>
           <div style={{ display:"flex", justifyContent:"space-between", alignItems:"center", marginBottom:14 }}>
@@ -145,7 +145,7 @@ export default function Labour() {
 
           <div style={{ display:"flex", flexDirection:"column", gap:12 }}>
             {visible.map((w,i) => (
-              <div key={w.id} style={{ background:"#fff", border:"1px solid #e5e7eb", borderRadius:14, padding:"16px 18px", display:"flex", alignItems:"center", gap:16, boxShadow:"0 2px 6px rgba(0,0,0,0.05)" }}>
+              <div key={w.id} style={{ background:"#fff", border:"1px solid #e5e7eb", borderRadius:14, padding:"14px 16px", display:"flex", alignItems:"flex-start", gap:14, boxShadow:"0 2px 6px rgba(0,0,0,0.05)", flexWrap:"wrap" }}>
                 <div style={{ width:56, height:56, borderRadius:"50%", background:COLORS[i%COLORS.length], display:"flex", alignItems:"center", justifyContent:"center", fontSize:28, flexShrink:0 }}>
                   {EMOJIS[i%EMOJIS.length]}
                 </div>
@@ -255,6 +255,19 @@ export default function Labour() {
           </div>
         </div>
       )}
+      <style>{`
+        @media (min-width: 768px) {
+          .labour-main-grid { grid-template-columns: 1fr 280px !important; }
+        }
+        @media (max-width: 480px) {
+          .labour-main-grid > div:first-child > div > div[style*="flex-shrink: 0"] {
+            align-items: flex-start !important;
+            flex-direction: row !important;
+            flex-wrap: wrap !important;
+            width: 100% !important;
+          }
+        }
+      `}</style>
     </div>
   );
 }

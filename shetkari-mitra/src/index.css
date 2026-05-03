@@ -518,6 +518,111 @@ tr:hover { background: rgba(22,163,74,0.05) !important; }
     height: calc(100vh - 260px) !important;
   }
 
+  /* Messages page responsive grid */
+  .messages-grid {
+    grid-template-columns: 1fr !important;
+    height: calc(100vh - 170px) !important;
+  }
+  .contacts-panel {
+    display: flex !important;
+  }
+
+  /* ════════════════════════════════
+     TRACTOR PAGE — MOBILE
+  ════════════════════════════════ */
+
+  /* Hero section stack */
+  div[style*="gridTemplateColumns: \"1.2fr 1fr\""],
+  div[style*="grid-template-columns: 1.2fr 1fr"] {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* Category pills - horizontal scroll */
+  div[style*="overflow-x: auto"] {
+    -webkit-overflow-scrolling: touch !important;
+  }
+
+  /* Tractor/tool cards: 2-col → 1-col on very small screens */
+  div[style*="repeat(2,1fr)"] {
+    grid-template-columns: 1fr !important;
+    gap: 12px !important;
+  }
+
+  /* Search bar full width */
+  div[style*="maxWidth: 1280"] > div[style*="display: flex"] {
+    flex-direction: column !important;
+    gap: 10px !important;
+  }
+
+  /* ════════════════════════════════
+     LABOUR PAGE — MOBILE
+  ════════════════════════════════ */
+
+  /* Labour hero: hide big emoji illustration */
+  div[style*="width:180px"][style*="height:120px"] {
+    display: none !important;
+  }
+
+  /* Category filter scroll */
+  div[style*="overflowX: \"auto\""] {
+    flex-wrap: nowrap !important;
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch !important;
+    padding-bottom: 8px !important;
+  }
+
+  /* Worker cards grid: 2-col → 1-col */
+  div[style*="repeat(2,1fr)"] {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* ════════════════════════════════
+     FARMER DASHBOARD — MOBILE
+  ════════════════════════════════ */
+
+  /* Stats row: 4-col → 2-col */
+  div[style*="repeat(4,1fr)"] {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 10px !important;
+  }
+
+  /* Content grids: 1.4fr 1fr → 1-col */
+  div[style*="1.4fr 1fr"] {
+    grid-template-columns: 1fr !important;
+    gap: 14px !important;
+  }
+
+  /* Message section: 320px 1fr → 1-col */
+  div[style*="320px 1fr"] {
+    grid-template-columns: 1fr !important;
+    gap: 0 !important;
+  }
+
+  /* Earnings: 3-col → 2-col */
+  div[style*="repeat(3,1fr)"] {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 10px !important;
+  }
+
+  /* Dashboard header padding */
+  header[style*="padding: \"14px 28px\""],
+  header[style*="padding: 14px 28px"] {
+    padding: 10px 12px !important;
+  }
+
+  /* Main content padding */
+  .farmer-main > div[style*="padding: 28px"] {
+    padding: 14px 12px !important;
+  }
+  .farmer-main div[style*="padding: 24px"] {
+    padding: 14px 12px !important;
+  }
+
+  /* Booking cards: 3-col → 1-col */
+  div[style*="repeat(3,1fr)"] {
+    grid-template-columns: 1fr !important;
+  }
+
   /* ════════════════════════════════
      GENERAL CARDS
   ════════════════════════════════ */

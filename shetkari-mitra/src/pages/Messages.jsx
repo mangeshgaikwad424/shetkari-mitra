@@ -103,46 +103,56 @@ export default function Messages() {
     <div style={{ minHeight: "100vh", background: "#f8fafc", fontFamily: "'Inter', sans-serif" }}>
       <Navbar />
 
-      <div style={{ maxWidth: 1100, margin: "0 auto", padding: "24px 16px" }}>
+      <div style={{ maxWidth: 1100, margin: "0 auto", padding: "16px 12px" }}>
         {/* Header */}
-        <div style={{ marginBottom: 20, display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+        <div style={{ marginBottom: 16, display: "flex", alignItems: "center", justifyContent: "space-between" }}>
           <div>
-            <h1 style={{ fontSize: 28, fontWeight: 800, color: "#111827" }}>
+            <h1 style={{ fontSize: "clamp(20px,5vw,28px)", fontWeight: 800, color: "#111827", margin: 0 }}>
               💬 {mr ? "संदेश" : "Messages"}
             </h1>
-            <p style={{ fontSize: 14, color: "#6b7280", marginTop: 4 }}>
+            <p style={{ fontSize: 13, color: "#6b7280", marginTop: 4, marginBottom: 0 }}>
               {mr ? "इतर वापरकर्त्यांशी संवाद साधा" : "Connect and chat with other users"}
             </p>
           </div>
           {totalUnread > 0 && (
             <div style={{
-              background: "#ef4444", color: "#fff", borderRadius: 20, padding: "4px 16px",
-              fontSize: 13, fontWeight: 700,
+              background: "#ef4444", color: "#fff", borderRadius: 20, padding: "4px 14px",
+              fontSize: 13, fontWeight: 700, whiteSpace: "nowrap",
             }}>
               {totalUnread} {mr ? "न वाचलेले" : "Unread"}
             </div>
           )}
         </div>
 
+        {/* Mobile: show either contact list OR chat, not both */}
         <div style={{
-          display: "grid", gridTemplateColumns: "300px 1fr", gap: 16,
-          height: "calc(100vh - 200px)", minHeight: 500,
-        }}>
+          display: "grid",
+          gridTemplateColumns: selectedContact ? "0 1fr" : "1fr 0",
+          gap: 12,
+          height: "calc(100vh - 180px)",
+          minHeight: 400,
+        }}
+          className="messages-grid"
+        >
           {/* Contacts list */}
           <div style={{
             background: "#fff", borderRadius: 16, border: "1px solid #e5e7eb",
-            display: "flex", flexDirection: "column", overflow: "hidden",
-          }}>
+            display: selectedContact ? "none" : "flex",
+            flexDirection: "column", overflow: "hidden",
+          }}
+            className="contacts-panel"
+          >
             {/* Search */}
-            <div style={{ padding: "14px 14px 0" }}>
+            <div style={{ padding: "12px 12px 0" }}>
               <input
                 type="text"
                 value={searchQ}
                 onChange={(e) => setSearchQ(e.target.value)}
                 placeholder={mr ? "संपर्क शोधा..." : "Search contacts..."}
                 style={{
-                  width: "100%", border: "1px solid #e5e7eb", borderRadius: 10,
-                  padding: "9px 12px", fontSize: 13, outline: "none", boxSizing: "border-box",
+                  width: "100%", border: "1.5px solid #e5e7eb", borderRadius: 10,
+                  padding: "9px 12px", fontSize: 14, outline: "none", boxSizing: "border-box",
+                  fontFamily: "inherit",
                 }}
               />
             </div>
@@ -162,24 +172,24 @@ export default function Messages() {
                     onClick={() => selectContact(c)}
                     style={{
                       width: "100%", textAlign: "left", display: "flex", alignItems: "center",
-                      gap: 10, padding: "11px 10px", borderRadius: 10, marginBottom: 2,
-                      background: isSelected ? "#f0fdf4" : "transparent",
-                      border: isSelected ? "1px solid #bbf7d0" : "1px solid transparent",
+                      gap: 10, padding: "12px 10px", borderRadius: 10, marginBottom: 4,
+                      background: isSelected ? "#f0fdf4" : "#fafafa",
+                      border: isSelected ? "1px solid #bbf7d0" : "1px solid #f3f4f6",
                       cursor: "pointer", transition: "all 0.15s",
                     }}
                   >
                     {/* Avatar */}
                     <div style={{
-                      width: 40, height: 40, borderRadius: "50%",
+                      width: 44, height: 44, borderRadius: "50%",
                       background: "linear-gradient(135deg,#14532d,#16a34a)",
                       display: "flex", alignItems: "center", justifyContent: "center",
-                      color: "#fff", fontWeight: 800, fontSize: 16, flexShrink: 0,
+                      color: "#fff", fontWeight: 800, fontSize: 18, flexShrink: 0,
                     }}>
                       {c.icon || c.name?.charAt(0)}
                     </div>
                     <div style={{ flex: 1, minWidth: 0 }}>
                       <div style={{
-                        fontWeight: 700, fontSize: 13, color: "#111827",
+                        fontWeight: 700, fontSize: 14, color: "#111827",
                         display: "flex", alignItems: "center", justifyContent: "space-between",
                       }}>
                         <span style={{ overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
@@ -188,22 +198,22 @@ export default function Messages() {
                         {unread > 0 && (
                           <span style={{
                             background: "#ef4444", color: "#fff", borderRadius: "50%",
-                            width: 18, height: 18, display: "flex", alignItems: "center",
-                            justifyContent: "center", fontSize: 10, fontWeight: 800, flexShrink: 0,
+                            width: 20, height: 20, display: "flex", alignItems: "center",
+                            justifyContent: "center", fontSize: 11, fontWeight: 800, flexShrink: 0,
                           }}>{unread}</span>
                         )}
                       </div>
-                      <div style={{ display: "flex", alignItems: "center", gap: 6, marginTop: 2 }}>
+                      <div style={{ display: "flex", alignItems: "center", gap: 6, marginTop: 3 }}>
                         <span style={{
-                          fontSize: 10, fontWeight: 700, padding: "1px 7px", borderRadius: 20,
+                          fontSize: 10, fontWeight: 700, padding: "2px 8px", borderRadius: 20,
                           background: roleCol.bg, color: roleCol.text,
                         }}>{getRoleLabel(c.role)}</span>
                         {conv?.lastMsg && (
                           <span style={{
-                            fontSize: 11, color: "#9ca3af",
+                            fontSize: 12, color: "#9ca3af",
                             overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap",
                           }}>
-                            {conv.lastMsg.text?.slice(0, 20)}{conv.lastMsg.text?.length > 20 ? "..." : ""}
+                            {conv.lastMsg.text?.slice(0, 22)}{conv.lastMsg.text?.length > 22 ? "..." : ""}
                           </span>
                         )}
                       </div>
@@ -224,35 +234,47 @@ export default function Messages() {
           <div style={{
             background: "#fff", borderRadius: 16, border: "1px solid #e5e7eb",
             display: "flex", flexDirection: "column", overflow: "hidden",
+            gridColumn: selectedContact ? "1 / -1" : "2",
           }}>
             {selectedContact ? (
               <>
-                {/* Chat header */}
+                {/* Chat header with back button */}
                 <div style={{
-                  padding: "14px 20px", borderBottom: "1px solid #f3f4f6",
-                  display: "flex", alignItems: "center", gap: 12,
+                  padding: "12px 16px", borderBottom: "1px solid #f3f4f6",
+                  display: "flex", alignItems: "center", gap: 10,
                   background: "linear-gradient(135deg,#f0fdf4,#dcfce7)",
                 }}>
+                  {/* Back button for mobile */}
+                  <button
+                    onClick={() => setSelectedContact(null)}
+                    style={{
+                      background: "rgba(255,255,255,0.8)", border: "1px solid #d1fae5",
+                      borderRadius: 8, padding: "6px 10px", cursor: "pointer",
+                      fontSize: 16, fontWeight: 700, color: "#15803d", flexShrink: 0,
+                    }}
+                  >
+                    ←
+                  </button>
                   <div style={{
-                    width: 44, height: 44, borderRadius: "50%",
+                    width: 40, height: 40, borderRadius: "50%",
                     background: "linear-gradient(135deg,#14532d,#16a34a)",
                     display: "flex", alignItems: "center", justifyContent: "center",
-                    color: "#fff", fontWeight: 800, fontSize: 18,
+                    color: "#fff", fontWeight: 800, fontSize: 18, flexShrink: 0,
                   }}>
                     {selectedContact.icon || selectedContact.name?.charAt(0)}
                   </div>
-                  <div>
-                    <div style={{ fontWeight: 800, fontSize: 16, color: "#111827" }}>
+                  <div style={{ minWidth: 0 }}>
+                    <div style={{ fontWeight: 800, fontSize: 15, color: "#111827", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
                       {selectedContact.name}
                     </div>
-                    <div style={{ fontSize: 12, color: "#6b7280" }}>
-                      {selectedContact.email} · {getRoleLabel(selectedContact.role)}
+                    <div style={{ fontSize: 11, color: "#6b7280" }}>
+                      {getRoleLabel(selectedContact.role)}
                     </div>
                   </div>
                 </div>
 
                 {/* Messages */}
-                <div style={{ flex: 1, overflowY: "auto", padding: "16px 20px", display: "flex", flexDirection: "column", gap: 10 }}>
+                <div style={{ flex: 1, overflowY: "auto", padding: "14px 14px", display: "flex", flexDirection: "column", gap: 10 }}>
                   {messages.length === 0 && (
                     <div style={{ textAlign: "center", color: "#9ca3af", padding: 48 }}>
                       <div style={{ fontSize: 48, marginBottom: 12 }}>💬</div>
@@ -272,12 +294,13 @@ export default function Messages() {
                         }}
                       >
                         <div style={{
-                          maxWidth: "70%",
+                          maxWidth: "78%",
                           background: isMine ? "linear-gradient(135deg,#16a34a,#15803d)" : "#f3f4f6",
                           color: isMine ? "#fff" : "#111827",
                           padding: "10px 14px", borderRadius: isMine ? "18px 18px 4px 18px" : "18px 18px 18px 4px",
-                          fontSize: 13, lineHeight: 1.5,
+                          fontSize: 14, lineHeight: 1.5,
                           boxShadow: "0 1px 4px rgba(0,0,0,0.06)",
+                          wordBreak: "break-word",
                         }}>
                           <div>{m.text}</div>
                           <div style={{
@@ -296,30 +319,32 @@ export default function Messages() {
                 </div>
 
                 {/* Input */}
-                <form
-                  onSubmit={handleSend}
+                <div
                   style={{
-                    padding: "12px 16px", borderTop: "1px solid #f3f4f6",
-                    display: "flex", gap: 10, alignItems: "center",
+                    padding: "10px 12px", borderTop: "1px solid #f3f4f6",
+                    display: "flex", gap: 8, alignItems: "center",
+                    background: "#fff",
                   }}
                 >
                   <input
                     type="text"
                     value={text}
                     onChange={(e) => setText(e.target.value)}
+                    onKeyDown={(e) => e.key === "Enter" && !e.shiftKey && handleSend(e)}
                     placeholder={mr ? "संदेश टाइप करा..." : "Type a message..."}
                     style={{
-                      flex: 1, border: "1px solid #e5e7eb", borderRadius: 24,
+                      flex: 1, border: "1.5px solid #e5e7eb", borderRadius: 24,
                       padding: "10px 16px", fontSize: 14, outline: "none",
+                      fontFamily: "inherit", minWidth: 0,
                     }}
                   />
                   <button
-                    type="submit"
+                    onClick={handleSend}
                     disabled={!text.trim()}
                     style={{
                       background: text.trim() ? "linear-gradient(135deg,#16a34a,#15803d)" : "#e5e7eb",
                       color: text.trim() ? "#fff" : "#9ca3af",
-                      border: "none", borderRadius: "50%", width: 44, height: 44,
+                      border: "none", borderRadius: "50%", width: 44, height: 44, minWidth: 44,
                       display: "flex", alignItems: "center", justifyContent: "center",
                       cursor: text.trim() ? "pointer" : "not-allowed", fontSize: 20,
                       transition: "all 0.2s",
@@ -327,26 +352,39 @@ export default function Messages() {
                   >
                     ➤
                   </button>
-                </form>
+                </div>
               </>
             ) : (
               <div style={{
                 flex: 1, display: "flex", flexDirection: "column",
                 alignItems: "center", justifyContent: "center", color: "#9ca3af",
+                padding: 24,
               }}>
-                <div style={{ fontSize: 64, marginBottom: 16 }}>💬</div>
-                <h3 style={{ fontSize: 18, fontWeight: 700, color: "#374151", marginBottom: 8 }}>
+                <div style={{ fontSize: 56, marginBottom: 16 }}>💬</div>
+                <h3 style={{ fontSize: 17, fontWeight: 700, color: "#374151", marginBottom: 8, textAlign: "center" }}>
                   {mr ? "संदेश सुरू करा" : "Select a conversation"}
                 </h3>
-                <p style={{ fontSize: 14, textAlign: "center", maxWidth: 300 }}>
+                <p style={{ fontSize: 13, textAlign: "center", maxWidth: 260, color: "#9ca3af" }}>
                   {mr
                     ? "डावीकडून संपर्क निवडा आणि संभाषण सुरू करा"
-                    : "Select a contact from the left to start chatting"}
+                    : "Select a contact from the list to start chatting"}
                 </p>
               </div>
             )}
           </div>
         </div>
+
+        {/* Responsive styles */}
+        <style>{`
+          @media (min-width: 640px) {
+            .messages-grid {
+              grid-template-columns: 280px 1fr !important;
+            }
+            .contacts-panel {
+              display: flex !important;
+            }
+          }
+        `}</style>
       </div>
     </div>
   );

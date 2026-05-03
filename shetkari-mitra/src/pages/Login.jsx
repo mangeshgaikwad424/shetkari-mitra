@@ -1,4 +1,3 @@
-
 import { useState, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
@@ -26,7 +25,7 @@ export default function Login() {
   const navigate = useNavigate();
 
   const handleLogin = async (e) => {
-    e.preventDefault();
+    if (typeof e?.preventDefault === "function") e.preventDefault();
 
     if (!selectedRole) {
       setError(lang === "mr" ? "कृपया भूमिका निवडा" : "Please select a role");
@@ -68,55 +67,94 @@ export default function Login() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-green-50 to-green-100 px-4">
-      <div className="bg-white shadow-2xl rounded-3xl p-8 w-full max-w-md">
+    <div style={{
+      minHeight: "100vh",
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
+      background: "linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%)",
+      padding: "16px",
+      boxSizing: "border-box",
+    }}>
+      <div style={{
+        background: "#fff",
+        boxShadow: "0 8px 40px rgba(0,0,0,0.12)",
+        borderRadius: 24,
+        padding: "28px 20px",
+        width: "100%",
+        maxWidth: 420,
+        boxSizing: "border-box",
+      }}>
 
         {/* Logo / Title */}
-        <h1 className="text-3xl font-bold text-center text-green-700">
+        <h1 style={{ fontSize: "clamp(22px, 6vw, 30px)", fontWeight: 800, textAlign: "center", color: "#15803d", margin: 0 }}>
           🌱 Shetkari Mitra
         </h1>
-        <p className="text-center text-gray-500 mt-2 mb-6">
+        <p style={{ textAlign: "center", color: "#6b7280", marginTop: 6, marginBottom: 20, fontSize: 14 }}>
           {lang === "mr" ? "आपल्या खात्यात लॉगिन करा" : "Access your account"}
         </p>
 
         {/* Role Selection */}
-        <div className="grid grid-cols-2 gap-3 mb-6">
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10, marginBottom: 20 }}>
           {USER_TYPES.map((role) => (
             <button
               key={role.id}
               onClick={() => setSelectedRole(role.id)}
-              className={`p-3 rounded-xl border font-medium transition ${selectedRole === role.id
-                  ? "bg-green-600 text-white border-green-600 shadow-md"
-                  : "bg-gray-50 text-gray-600 hover:border-green-400"
-                }`}
+              style={{
+                padding: "10px 8px",
+                borderRadius: 12,
+                border: selectedRole === role.id ? "2px solid #16a34a" : "2px solid #e5e7eb",
+                fontWeight: 600,
+                fontSize: 13,
+                cursor: "pointer",
+                background: selectedRole === role.id ? "#16a34a" : "#f9fafb",
+                color: selectedRole === role.id ? "#fff" : "#4b5563",
+                transition: "all 0.2s",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                gap: 6,
+              }}
             >
-              {role.icon} {role.label}
+              <span style={{ fontSize: 18 }}>{role.icon}</span>
+              <span>{role.label}</span>
             </button>
           ))}
         </div>
 
         {/* Form */}
-        <form onSubmit={handleLogin} className="space-y-4">
+        <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
 
           <input
             type="email"
             placeholder="Email address"
-            className="w-full p-3 border rounded-xl focus:ring-2 focus:ring-green-400 outline-none"
+            style={{
+              width: "100%", padding: "12px 14px", border: "1.5px solid #e5e7eb",
+              borderRadius: 12, fontSize: 14, outline: "none", boxSizing: "border-box",
+              fontFamily: "inherit",
+            }}
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
 
-          <div className="relative">
+          <div style={{ position: "relative" }}>
             <input
               type={showPassword ? "text" : "password"}
               placeholder="Password"
-              className="w-full p-3 border rounded-xl focus:ring-2 focus:ring-green-400 outline-none"
+              style={{
+                width: "100%", padding: "12px 44px 12px 14px", border: "1.5px solid #e5e7eb",
+                borderRadius: 12, fontSize: 14, outline: "none", boxSizing: "border-box",
+                fontFamily: "inherit",
+              }}
               value={password}
               onChange={(e) => setPassword(e.target.value)}
             />
             <span
               onClick={() => setShowPassword(!showPassword)}
-              className="absolute right-4 top-3 cursor-pointer text-gray-500"
+              style={{
+                position: "absolute", right: 14, top: "50%", transform: "translateY(-50%)",
+                cursor: "pointer", fontSize: 18, lineHeight: 1,
+              }}
             >
               {showPassword ? "🙈" : "👁️"}
             </span>
@@ -124,27 +162,35 @@ export default function Login() {
 
           {/* Error */}
           {error && (
-            <div className="text-red-600 text-sm bg-red-50 border border-red-200 p-2 rounded-lg">
+            <div style={{
+              color: "#dc2626", fontSize: 13, background: "#fef2f2",
+              border: "1px solid #fecaca", padding: "10px 12px", borderRadius: 10,
+            }}>
               {error}
             </div>
           )}
 
           {/* Button */}
           <button
-            type="submit"
+            onClick={handleLogin}
             disabled={loading}
-            className="w-full bg-green-600 text-white p-3 rounded-xl font-semibold hover:bg-green-700 transition"
+            style={{
+              width: "100%", background: loading ? "#9ca3af" : "#16a34a",
+              color: "#fff", padding: "13px", borderRadius: 12,
+              fontWeight: 700, fontSize: 15, border: "none", cursor: loading ? "not-allowed" : "pointer",
+              marginTop: 4, fontFamily: "inherit",
+            }}
           >
             {loading ? "Please wait..." : "Login"}
           </button>
-        </form>
+        </div>
 
         {/* Links */}
-        <div className="flex justify-between mt-5 text-sm">
-          <Link to="/forgot" className="text-green-600 hover:underline">
+        <div style={{ display: "flex", justifyContent: "space-between", marginTop: 18, fontSize: 13 }}>
+          <Link to="/forgot" style={{ color: "#16a34a", textDecoration: "none", fontWeight: 600 }}>
             Forgot Password?
           </Link>
-          <Link to="/register" className="text-green-600 hover:underline">
+          <Link to="/register" style={{ color: "#16a34a", textDecoration: "none", fontWeight: 600 }}>
             Create Account
           </Link>
         </div>
