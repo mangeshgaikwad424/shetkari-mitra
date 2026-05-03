@@ -589,3 +589,26 @@ a, button { transition: all 0.15s ease; }
     grid-template-columns: repeat(3, 1fr) !important;
   }
 }
+
+/* ══════════════════════════════════════════════════════════════════
+   WEATHER PAGE — MOBILE
+══════════════════════════════════════════════════════════════════ */
+
+/* Stats grid: 2 cols on mobile, 3 on tablet, 6 on desktop */
+@media (min-width: 641px) {
+  .weather-stats-grid {
+    grid-template-columns: repeat(3, 1fr) !important;
+  }
+}
+@media (min-width: 1024px) {
+  .weather-stats-grid {
+    grid-template-columns: repeat(6, 1fr) !important;
+  }
+}
+
+/* Hide the inline quick-stats panel on mobile (already in stats grid) */
+@media (max-width: 640px) {
+  .weather-quick-stats {
+    display: none !important;
+  }
+}
