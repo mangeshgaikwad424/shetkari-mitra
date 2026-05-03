@@ -11,7 +11,7 @@
   box-sizing: border-box;
 }
 
-/* ─── ROOT VARIABLES (Light Mode) ─────────────────────────────────────────── */
+/* ─── ROOT VARIABLES ──────────────────────────────────────────────────────── */
 :root {
   --text: #374151;
   --heading: #111827;
@@ -26,23 +26,11 @@
   --primary-light: #dcfce7;
 }
 
-/* ─── DARK MODE VARIABLES ─────────────────────────────────────────────────── */
-:root.dark {
-  --text: #d1d5db;
-  --heading: #f9fafb;
-  --bg: #0f172a;
-  --bg-secondary: #1e293b;
-  --border: #334155;
-  --card: #1e293b;
-  --shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
-}
-
 /* ─── BODY ──────────────────────────────────────────────────────────────────── */
 body {
   font-family: var(--font);
   color: var(--text);
-  background: var(--bg);
-  transition: background 0.2s, color 0.2s;
+  background: #ffffff;
   overflow-x: hidden;
   width: 100%;
 }
@@ -388,12 +376,8 @@ tr:hover { background: rgba(22,163,74,0.05) !important; }
   }
 
   /* Stats numbers smaller */
-  div[style*="font-size: 36px"] {
-    font-size: 20px !important;
-  }
-  div[style*="font-size: 36"] {
-    font-size: 20px !important;
-  }
+  div[style*="font-size: 36px"] { font-size: 20px !important; }
+  div[style*="font-size: 36"]   { font-size: 20px !important; }
 
   /* Features: 4-col → 2-col */
   div[style*="repeat(4,1fr)"] {
@@ -402,12 +386,8 @@ tr:hover { background: rgba(22,163,74,0.05) !important; }
   }
 
   /* Feature card padding */
-  button[style*="padding: 22px 18px"] {
-    padding: 12px 10px !important;
-  }
-  button[style*="border-radius: 16px"] {
-    border-radius: 12px !important;
-  }
+  button[style*="padding: 22px 18px"] { padding: 12px 10px !important; }
+  button[style*="border-radius: 16px"] { border-radius: 12px !important; }
 
   /* How it works: 3-col → 1-col */
   div[style*="repeat(3,1fr)"],
@@ -417,9 +397,7 @@ tr:hover { background: rgba(22,163,74,0.05) !important; }
   }
 
   /* Testimonials: 3-col → 1-col */
-  div[style*="repeat(3,1fr)"] {
-    grid-template-columns: 1fr !important;
-  }
+  div[style*="repeat(3,1fr)"] { grid-template-columns: 1fr !important; }
 
   /* New features: 2-col → 1-col */
   div[style*="repeat(2,1fr)"],
@@ -472,9 +450,7 @@ tr:hover { background: rgba(22,163,74,0.05) !important; }
   }
 
   /* Role buttons 2x2 */
-  .role-grid {
-    grid-template-columns: repeat(2, 1fr) !important;
-  }
+  .role-grid { grid-template-columns: repeat(2, 1fr) !important; }
 
   /* ════════════════════════════════
      NAVBAR
@@ -491,9 +467,7 @@ tr:hover { background: rgba(22,163,74,0.05) !important; }
   /* ════════════════════════════════
      DASHBOARD PAGES
   ════════════════════════════════ */
-  .dashboard-grid {
-    grid-template-columns: 1fr !important;
-  }
+  .dashboard-grid { grid-template-columns: 1fr !important; }
   .stats-row {
     flex-direction: column !important;
     gap: 12px !important;
@@ -520,9 +494,7 @@ tr:hover { background: rgba(22,163,74,0.05) !important; }
     gap: 8px !important;
   }
   .mandi-filters select,
-  .mandi-filters input {
-    width: 100% !important;
-  }
+  .mandi-filters input { width: 100% !important; }
 
   /* ════════════════════════════════
      WEATHER
@@ -550,9 +522,7 @@ tr:hover { background: rgba(22,163,74,0.05) !important; }
      GENERAL CARDS
   ════════════════════════════════ */
   [class*="rounded-xl"],
-  [class*="rounded-2xl"] {
-    border-radius: 12px !important;
-  }
+  [class*="rounded-2xl"] { border-radius: 12px !important; }
 }
 
 /* ══════════════════════════════════════════════════════════════════
@@ -577,28 +547,7 @@ tr:hover { background: rgba(22,163,74,0.05) !important; }
     gap: 32px !important;
   }
 
-  .container {
-    padding: 0 24px !important;
-  }
-}
-
-/* ══════════════════════════════════════════════════════════════════
-   DARK MODE OVERRIDES
-══════════════════════════════════════════════════════════════════ */
-
-:root.dark .bg-white          { background: var(--card) !important; }
-:root.dark .bg-gray-50        { background: var(--bg-secondary) !important; }
-:root.dark .text-gray-700     { color: var(--text) !important; }
-:root.dark .text-gray-800     { color: var(--heading) !important; }
-:root.dark .border-gray-100,
-:root.dark .border-gray-200   { border-color: var(--border) !important; }
-
-:root.dark [class*="rounded-xl"]:hover,
-:root.dark [class*="rounded-2xl"]:hover {
-  box-shadow: 0 8px 24px rgba(0,0,0,0.4);
-}
-:root.dark button:hover {
-  box-shadow: 0 4px 14px rgba(0,0,0,0.4);
+  .container { padding: 0 24px !important; }
 }
 
 /* ══════════════════════════════════════════════════════════════════
@@ -608,7 +557,6 @@ tr:hover { background: rgba(22,163,74,0.05) !important; }
 ::-webkit-scrollbar { width: 6px; }
 ::-webkit-scrollbar-track { background: transparent; }
 ::-webkit-scrollbar-thumb { background: #d1d5db; border-radius: 4px; }
-:root.dark ::-webkit-scrollbar-thumb { background: #475569; }
 
 /* ══════════════════════════════════════════════════════════════════
    SMOOTH TRANSITIONS
