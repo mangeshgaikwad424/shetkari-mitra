@@ -1,0 +1,43 @@
+{
+  "name": "Shetkari Mitra",
+  "short_name": "ShetkariMitra",
+  "description": "India's #1 Farmer Platform — Connect, Book, Earn",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#16a34a",
+  "orientation": "portrait-primary",
+  "categories": ["agriculture", "business", "productivity"],
+  "lang": "mr",
+  "icons": [
+    {
+      "src": "/src/assets/logo.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/src/assets/logo.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "screenshots": [],
+  "shortcuts": [
+    {
+      "name": "Dashboard",
+      "short_name": "Dashboard",
+      "description": "Open your dashboard",
+      "url": "/dashboard",
+      "icons": [{ "src": "/src/assets/logo.png", "sizes": "96x96" }]
+    },
+    {
+      "name": "Mandi Prices",
+      "short_name": "Mandi",
+      "description": "Live mandi prices",
+      "url": "/mandi",
+      "icons": [{ "src": "/src/assets/logo.png", "sizes": "96x96" }]
+    }
+  ]
+}
