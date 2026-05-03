@@ -209,7 +209,7 @@ export default function Navbar() {
             alt="Shetkari Mitra Logo"
             className="h-9 w-auto transition-transform duration-200 hover:scale-105"
           />
-          <span className="hidden sm:inline">Shetkari Mitra</span>
+          <span className="text-sm md:text-base">Shetkari Mitra</span>
         </Link>
 
         {/* Desktop nav */}

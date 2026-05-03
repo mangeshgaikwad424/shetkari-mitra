@@ -571,3 +571,21 @@ a, button { transition: all 0.15s ease; }
 @media print {
   nav, aside, .no-print { display: none !important; }
 }
+
+/* ══════════════════════════════════════════════════════════════════
+   FOOTER RESPONSIVE GRID
+══════════════════════════════════════════════════════════════════ */
+
+/* Mobile: 2 cols (default already set inline) */
+/* Tablet+: 3 cols */
+@media (min-width: 641px) {
+  .footer-links-grid {
+    grid-template-columns: repeat(3, 1fr) !important;
+  }
+}
+/* Desktop: 3 cols still, brand is above */
+@media (min-width: 1024px) {
+  .footer-links-grid {
+    grid-template-columns: repeat(3, 1fr) !important;
+  }
+}

@@ -443,59 +443,96 @@ export default function Home() {
       </section>
 
       {/* ─── FOOTER ─── */}
-      <footer style={{ background: "#0f172a", color: "#94a3b8", padding: "56px 24px 32px" }}>
+      <footer style={{ background: "#0f172a", color: "#94a3b8", padding: "48px 20px 28px" }}>
         <div style={{ maxWidth: 1200, margin: "0 auto" }}>
-          <div style={{ display: "grid", gridTemplateColumns: "2fr 1fr 1fr 1fr", gap: 40, marginBottom: 48 }}>
-            <div>
-              <div style={{ fontSize: 20, fontWeight: 800, color: "#fff", marginBottom: 12, display: "flex", alignItems: "center", gap: 8 }}>
-                <img src={logo} alt="Logo" style={{ height: 28, width: "auto" }} />
-                {lang === "mr" ? "शेतकरी मित्र" : "Shetkari Mitra"}
-              </div>
-              <p style={{ fontSize: 14, lineHeight: 1.7, maxWidth: 280 }}>
-                {lang === "mr" ? "शेतकरी, ट्रॅक्टर मालक, मजूर आणि सरकार यांना जोडणारे भारतातील सर्वात विश्वासार्ह व्यासपीठ. १५ राज्यांमध्ये ५ भाषांमध्ये उपलब्ध." : "India's most trusted platform connecting farmers, tractor owners, labourers and government. Available in 5 languages across 15 states."}
-              </p>
-              <div style={{ display: "flex", gap: 12, marginTop: 16 }}>
-                {LANGS.map(l => (
-                  <button key={l.code} onClick={() => handleLang(l.code)}
-                    style={{ fontSize: 11, padding: "3px 8px", borderRadius: 12, cursor: "pointer", border: "1px solid #334155", background: activeLang === l.code ? "#16a34a" : "transparent", color: activeLang === l.code ? "#fff" : "#94a3b8" }}>
-                    {l.label}
-                  </button>
-                ))}
-              </div>
+
+          {/* Brand row — always full width on top */}
+          <div style={{ marginBottom: 36 }}>
+            <div style={{ fontSize: 20, fontWeight: 800, color: "#fff", marginBottom: 10, display: "flex", alignItems: "center", gap: 8 }}>
+              <img src={logo} alt="Logo" style={{ height: 28, width: "auto" }} />
+              {lang === "mr" ? "शेतकरी मित्र" : "Shetkari Mitra"}
             </div>
+            <p style={{ fontSize: 13, lineHeight: 1.7, maxWidth: 340 }}>
+              {lang === "mr"
+                ? "शेतकरी, ट्रॅक्टर मालक, मजूर आणि सरकार यांना जोडणारे भारतातील सर्वात विश्वासार्ह व्यासपीठ. १५ राज्यांमध्ये ५ भाषांमध्ये उपलब्ध."
+                : "India's most trusted platform connecting farmers, tractor owners, labourers and government. Available in 5 languages across 15 states."}
+            </p>
+            <div style={{ display: "flex", flexWrap: "wrap", gap: 8, marginTop: 14 }}>
+              {LANGS.map(l => (
+                <button key={l.code} onClick={() => handleLang(l.code)}
+                  style={{ fontSize: 11, padding: "4px 10px", borderRadius: 12, cursor: "pointer", border: "1px solid #334155", background: activeLang === l.code ? "#16a34a" : "transparent", color: activeLang === l.code ? "#fff" : "#94a3b8", transition: "all 0.2s" }}>
+                  {l.label}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          {/* Links grid — 2 cols on mobile, 3 cols on tablet+ */}
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: "28px 20px", marginBottom: 36 }}
+            className="footer-links-grid">
             <div>
-              <div style={{ fontWeight: 700, color: "#fff", marginBottom: 14, fontSize: 14 }}>{lang === "mr" ? "सेवा" : "Services"}</div>
-              {(lang === "mr" ? [["मार्केटप्लेस","/marketplace"],["ट्रॅक्टर बुकिंग","/tractor"],["मजूर मिळवा","/labour"],["पीक डॉक्टर","/crop-disease"],["बाजारभाव","/mandi"]] : [["Marketplace","/marketplace"],["Tractor Booking","/tractor"],["Hire Labour","/labour"],["Crop Doctor","/crop-disease"],["Mandi Prices","/mandi"]]).map(([label, link]) => (
+              <div style={{ fontWeight: 700, color: "#fff", marginBottom: 12, fontSize: 13, textTransform: "uppercase", letterSpacing: "0.05em" }}>
+                {lang === "mr" ? "सेवा" : "Services"}
+              </div>
+              {(lang === "mr"
+                ? [["मार्केटप्लेस","/marketplace"],["ट्रॅक्टर बुकिंग","/tractor"],["मजूर मिळवा","/labour"],["पीक डॉक्टर","/crop-disease"],["बाजारभाव","/mandi"]]
+                : [["Marketplace","/marketplace"],["Tractor Booking","/tractor"],["Hire Labour","/labour"],["Crop Doctor","/crop-disease"],["Mandi Prices","/mandi"]]
+              ).map(([label, link]) => (
                 <div key={label} style={{ marginBottom: 8 }}>
-                  <a href={link} style={{ fontSize: 13, color: "#94a3b8", textDecoration: "none" }} onMouseOver={e => e.target.style.color = "#4ade80"} onMouseOut={e => e.target.style.color = "#94a3b8"}>{label}</a>
+                  <a href={link} style={{ fontSize: 13, color: "#94a3b8", textDecoration: "none" }}
+                    onMouseOver={e => e.target.style.color = "#4ade80"}
+                    onMouseOut={e => e.target.style.color = "#94a3b8"}>{label}</a>
                 </div>
               ))}
             </div>
+
             <div>
-              <div style={{ fontWeight: 700, color: "#fff", marginBottom: 14, fontSize: 14 }}>{lang === "mr" ? "नवीन वैशिष्ट्ये" : "New Features"}</div>
-              {(lang === "mr" ? [["७/१२ उतारे","/land-records"],["व्हॉइस असिस्टंट","/voice"],["माती आरोग्य AI","/soil-health"],["शेतकरी मंच","/community"],["शासकीय योजना","/schemes"]] : [["7/12 Land Records","/land-records"],["Voice Assistant","/voice"],["Soil Health AI","/soil-health"],["Farmers Forum","/community"],["Govt Schemes","/schemes"]]).map(([label, link]) => (
+              <div style={{ fontWeight: 700, color: "#fff", marginBottom: 12, fontSize: 13, textTransform: "uppercase", letterSpacing: "0.05em" }}>
+                {lang === "mr" ? "नवीन वैशिष्ट्ये" : "New Features"}
+              </div>
+              {(lang === "mr"
+                ? [["७/१२ उतारे","/land-records"],["व्हॉइस असिस्टंट","/voice"],["माती आरोग्य AI","/soil-health"],["शेतकरी मंच","/community"],["शासकीय योजना","/schemes"]]
+                : [["7/12 Land Records","/land-records"],["Voice Assistant","/voice"],["Soil Health AI","/soil-health"],["Farmers Forum","/community"],["Govt Schemes","/schemes"]]
+              ).map(([label, link]) => (
                 <div key={label} style={{ marginBottom: 8 }}>
-                  <a href={link} style={{ fontSize: 13, color: "#94a3b8", textDecoration: "none" }} onMouseOver={e => e.target.style.color = "#4ade80"} onMouseOut={e => e.target.style.color = "#94a3b8"}>{label}</a>
+                  <a href={link} style={{ fontSize: 13, color: "#94a3b8", textDecoration: "none" }}
+                    onMouseOver={e => e.target.style.color = "#4ade80"}
+                    onMouseOut={e => e.target.style.color = "#94a3b8"}>{label}</a>
                 </div>
               ))}
             </div>
+
             <div>
-              <div style={{ fontWeight: 700, color: "#fff", marginBottom: 14, fontSize: 14 }}>{lang === "mr" ? "खाते" : "Account"}</div>
-              {(lang === "mr" ? [["लॉगिन","/login"],["नोंदणी","/register"],["डॅशबोर्ड","/dashboard"],["हवामान","/weather"],["संपर्क","mailto:support@shetkarimitra.in"]] : [["Login","/login"],["Register","/register"],["Dashboard","/dashboard"],["Weather","/weather"],["Support","mailto:support@shetkarimitra.in"]]).map(([label, link]) => (
+              <div style={{ fontWeight: 700, color: "#fff", marginBottom: 12, fontSize: 13, textTransform: "uppercase", letterSpacing: "0.05em" }}>
+                {lang === "mr" ? "खाते" : "Account"}
+              </div>
+              {(lang === "mr"
+                ? [["लॉगिन","/login"],["नोंदणी","/register"],["डॅशबोर्ड","/dashboard"],["हवामान","/weather"],["संपर्क","mailto:support@shetkarimitra.in"]]
+                : [["Login","/login"],["Register","/register"],["Dashboard","/dashboard"],["Weather","/weather"],["Support","mailto:support@shetkarimitra.in"]]
+              ).map(([label, link]) => (
                 <div key={label} style={{ marginBottom: 8 }}>
-                  <a href={link} style={{ fontSize: 13, color: "#94a3b8", textDecoration: "none" }} onMouseOver={e => e.target.style.color = "#4ade80"} onMouseOut={e => e.target.style.color = "#94a3b8"}>{label}</a>
+                  <a href={link} style={{ fontSize: 13, color: "#94a3b8", textDecoration: "none" }}
+                    onMouseOver={e => e.target.style.color = "#4ade80"}
+                    onMouseOut={e => e.target.style.color = "#94a3b8"}>{label}</a>
                 </div>
               ))}
             </div>
           </div>
-          <div style={{ borderTop: "1px solid #1e293b", paddingTop: 24, display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: 12 }}>
-            <div style={{ fontSize: 13 }}>© 2026 {lang === "mr" ? "शेतकरी मित्र · भारतीय शेतकऱ्यांसाठी ❤️ ने बनविलेले · महाराष्ट्र, भारत" : "Shetkari Mitra · Built with ❤️ for Indian Farmers · Maharashtra, India"}</div>
-            <div style={{ display: "flex", gap: 16, fontSize: 13 }}>
+
+          {/* Bottom bar */}
+          <div style={{ borderTop: "1px solid #1e293b", paddingTop: 20, display: "flex", flexDirection: "column", gap: 10, alignItems: "center", textAlign: "center" }}>
+            <div style={{ fontSize: 12, color: "#64748b" }}>
+              © 2026 {lang === "mr"
+                ? "शेतकरी मित्र · भारतीय शेतकऱ्यांसाठी ❤️ ने बनविलेले · महाराष्ट्र, भारत"
+                : "Shetkari Mitra · Built with ❤️ for Indian Farmers · Maharashtra, India"}
+            </div>
+            <div style={{ display: "flex", gap: 16, fontSize: 12, color: "#64748b", flexWrap: "wrap", justifyContent: "center" }}>
               <span>🌐 {lang === "mr" ? "५ भाषा" : "5 Languages"}</span>
               <span>📱 {lang === "mr" ? "PWA सज्ज" : "PWA Ready"}</span>
               <span>🔒 {lang === "mr" ? "सुरक्षित" : "Secure"}</span>
             </div>
           </div>
+
         </div>
       </footer>
     </div>
