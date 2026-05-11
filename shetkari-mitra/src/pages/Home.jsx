@@ -141,9 +141,9 @@ const STATS = [
 const LANGS = [
   { code: "en", label: "English" },
   { code: "mr", label: "मराठी" },
-  { code: "hi", label: "हिंदी" },
-  { code: "te", label: "తెలుగు" },
-  { code: "kn", label: "ಕನ್ನಡ" },
+  // { code: "hi", label: "हिंदी" },
+  // { code: "te", label: "తెలుగు" },
+  // { code: "kn", label: "ಕನ್ನಡ" },
 ];
 
 const TESTIMONIALS = [
@@ -276,7 +276,7 @@ export default function Home() {
       </section>
 
       {/* ─── STATS BAR ─── */}
-      <section style={{ background: "linear-gradient(135deg,#14532d,#16a34a)", padding: "36px 24px" }}>
+      {/* <section style={{ background: "linear-gradient(135deg,#14532d,#16a34a)", padding: "36px 24px" }}>
         <div style={{ maxWidth: 1000, margin: "0 auto", display: "grid", gridTemplateColumns: "repeat(4,1fr)", gap: 24, textAlign: "center" }}>
           {STATS.map((s, i) => (
             <div key={i}>
@@ -287,7 +287,7 @@ export default function Home() {
             </div>
           ))}
         </div>
-      </section>
+      </section> */}
 
       {/* ─── FEATURES GRID ─── */}
       <section style={{ padding: "80px 24px", background: "#fff" }}>
@@ -321,7 +321,7 @@ export default function Home() {
       </section>
 
       {/* ─── HOW IT WORKS ─── */}
-      <section style={{ background: "#f8fafc", padding: "80px 24px" }}>
+      {/* <section style={{ background: "#f8fafc", padding: "80px 24px" }}>
         <div style={{ maxWidth: 900, margin: "0 auto", textAlign: "center", marginBottom: 52 }}>
           <h2 style={{ fontSize: 40, fontWeight: 900, color: "#111827", marginBottom: 12 }}>{t.howTitle}</h2>
           <p style={{ fontSize: 16, color: "#6b7280" }}>{t.howDesc}</p>
@@ -344,10 +344,10 @@ export default function Home() {
             </div>
           ))}
         </div>
-      </section>
+      </section> */}
 
       {/* ─── TESTIMONIALS ─── */}
-      <section style={{ padding: "80px 24px", background: "#fff" }}>
+      {/* <section style={{ padding: "80px 24px", background: "#fff" }}>
         <div style={{ maxWidth: 1200, margin: "0 auto" }}>
           <div style={{ textAlign: "center", marginBottom: 48 }}>
             <h2 style={{ fontSize: 40, fontWeight: 900, color: "#111827" }}>{t.testimonials}</h2>
@@ -371,7 +371,7 @@ export default function Home() {
             ))}
           </div>
         </div>
-      </section>
+      </section> */}
 
       {/* ─── NEW FEATURES HIGHLIGHT ─── */}
       <section style={{ background: "linear-gradient(135deg,#f0fdf4,#dcfce7)", padding: "80px 24px" }}>
@@ -525,7 +525,7 @@ export default function Home() {
 
           {/* Bottom bar */}
           <div style={{ borderTop: "1px solid #1e293b", paddingTop: 20, display: "flex", flexDirection: "column", gap: 10, alignItems: "center", textAlign: "center" }}>
-            <div style={{ fontSize: 12, color: "#64748b" }}>
+            <div style={{ fontSize: 12, color: "#64748b" }}> 
               © 2026 {lang === "mr"
                 ? "शेतकरी मित्र · भारतीय शेतकऱ्यांसाठी ❤️ ने बनविलेले · महाराष्ट्र, भारत"
                 : "Shetkari Mitra · Built with ❤️ for Indian Farmers · Maharashtra, India"}

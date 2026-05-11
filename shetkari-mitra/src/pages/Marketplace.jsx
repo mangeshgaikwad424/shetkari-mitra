@@ -35,7 +35,7 @@ const PRODUCTS = [
     farmerEn: "Ramesh Jadhav", farmerMr: "रमेश जाधव",
     locationEn: "Latur, MH",  locationMr: "लातूर, MH",
     rating: 4.7, trending: "+3.2%",
-    img: "https://images.unsplash.com/photo-1585996926049-c706b0b8f5ee?w=400&q=80",
+    img: "https://images.unsplash.com/photo-1612869538502-b5baa439abd7?q=80&w=735&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
   },
   {
     id: 3, nameEn: "Soybean",   nameMr: "सोयाबीन",
@@ -44,7 +44,7 @@ const PRODUCTS = [
     farmerEn: "Mahesh Kale",   farmerMr: "महेश काळे",
     locationEn: "Akola, MH",  locationMr: "अकोला, MH",
     rating: 4.6, trending: "+2.1%",
-    img: "https://images.unsplash.com/photo-1618160702438-9b02ab6515c9?w=400&q=80",
+    img: "https://images.unsplash.com/photo-1639843606783-b2f9c50a7468?q=80&w=1373&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
   },
   {
     id: 4, nameEn: "Onion",     nameMr: "कांदा",
@@ -56,22 +56,13 @@ const PRODUCTS = [
     img: "https://images.unsplash.com/photo-1508747703725-719777637510?w=400&q=80",
   },
   {
-    id: 5, nameEn: "Besan",     nameMr: "बेसन",
-    qualityEn: "Grade A",       qualityMr: "ग्रेड A",
-    price: 3800, unit: "quintal", category: "pulse", badge: "organic",
-    farmerEn: "Priya More",    farmerMr: "प्रिया मोरे",
-    locationEn: "Pune, MH",   locationMr: "पुणे, MH",
-    rating: 4.4, trending: "+1.5%",
-    img: "https://images.unsplash.com/photo-1559181567-c3190ca9d738?w=400&q=80",
-  },
-  {
     id: 6, nameEn: "Groundnut", nameMr: "शेंगदाणे",
     qualityEn: "Bold Seeds",    qualityMr: "मोठे दाणे",
     price: 5200, unit: "quintal", category: "oilseed", badge: "verified",
     farmerEn: "Ganesh Shinde", farmerMr: "गणेश शिंदे",
     locationEn: "Solapur, MH", locationMr: "सोलापूर, MH",
     rating: 4.3, trending: "+0.8%",
-    img: "https://images.unsplash.com/photo-1567306226416-28f0efdc88ce?w=400&q=80",
+    img: "https://images.unsplash.com/photo-1724058663142-e6e1a5e89f2d?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
   },
   {
     id: 7, nameEn: "Tomato",    nameMr: "टोमॅटो",
@@ -89,7 +80,7 @@ const PRODUCTS = [
     farmerEn: "Arun Bhatt",    farmerMr: "अरुण भट",
     locationEn: "Nagpur, MH",  locationMr: "नागपूर, MH",
     rating: 4.1, trending: "+2.8%",
-    img: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&q=80",
+    img: "https://images.unsplash.com/photo-1524593410820-38510f580a77?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
   },
 ];
 
@@ -382,7 +373,7 @@ export default function Marketplace() {
           </div>
 
           {/* Why Marketplace */}
-          <div style={{ background: "#fff", borderRadius: 16, padding: "20px", boxShadow: "0 1px 6px rgba(0,0,0,0.07)" }}>
+          {/* <div style={{ background: "#fff", borderRadius: 16, padding: "20px", boxShadow: "0 1px 6px rgba(0,0,0,0.07)" }}>
             <div style={{ fontWeight: 800, fontSize: 15, color: "#111827", marginBottom: 14 }}>
               {t("Why Marketplace?", "मार्केटप्लेस का?")}
             </div>
@@ -407,56 +398,11 @@ export default function Marketplace() {
                 </div>
               ))}
             </div>
-          </div>
+          </div> */}
 
-          {/* New to Marketplace CTA */}
-          <div style={{
-            borderRadius: 16, padding: "20px",
-            background: "linear-gradient(135deg,#14532d 0%,#16a34a 100%)",
-            boxShadow: "0 4px 16px rgba(22,163,74,0.3)",
-            position: "relative", overflow: "hidden",
-          }}>
-            {/* decorative circle */}
-            <div style={{ position: "absolute", top: -20, right: -20, width: 80, height: 80, borderRadius: "50%", background: "rgba(255,255,255,0.08)" }} />
-            <div style={{ position: "absolute", bottom: -10, right: 10, fontSize: 48, opacity: 0.2 }}>🌱</div>
-
-            <div style={{ position: "relative", zIndex: 1 }}>
-              <div style={{ fontWeight: 800, fontSize: 15, color: "#fff", marginBottom: 6 }}>
-                {t("New to Marketplace?", "मार्केटप्लेस नवीन आहे?")}
-              </div>
-              <p style={{ fontSize: 12, color: "rgba(255,255,255,0.8)", marginBottom: 16, lineHeight: 1.5 }}>
-                {t("Learn how to buy and sell products easily.", "उत्पादने सहज खरेदी व विक्री कशी करावी ते जाणून घ्या.")}
-              </p>
-              <button style={{
-                background: "#fff", color: "#15803d", border: "none",
-                borderRadius: 10, padding: "9px 18px", fontWeight: 800, fontSize: 13,
-                cursor: "pointer", width: "100%",
-              }}>
-                {t("Learn More", "अधिक जाणून घ्या")}
-              </button>
-            </div>
-          </div>
-
-          {/* Sell your produce CTA */}
-          <div style={{
-            background: "#fff", borderRadius: 16, padding: "20px",
-            boxShadow: "0 1px 6px rgba(0,0,0,0.07)", textAlign: "center",
-          }}>
-            <div style={{ fontSize: 40, marginBottom: 10 }}>👨‍🌾</div>
-            <div style={{ fontWeight: 800, fontSize: 15, color: "#111827", marginBottom: 6 }}>
-              {t("Sell your produce", "तुमचा माल विका")}
-            </div>
-            <p style={{ fontSize: 12, color: "#6b7280", marginBottom: 14, lineHeight: 1.5 }}>
-              {t("Reach thousands of buyers across the region.", "प्रदेशातील हजारो खरेदीदारांपर्यंत पोहोचा.")}
-            </p>
-            <button style={{
-              width: "100%", background: "#16a34a", color: "#fff", border: "none",
-              borderRadius: 10, padding: "10px", fontWeight: 800, fontSize: 13,
-              cursor: "pointer", boxShadow: "0 2px 8px rgba(22,163,74,0.3)",
-            }}>
-              {t("Sell Now", "आत्ताच विका")}
-            </button>
-          </div>
+  
+         
+         
         </div>
       </div>
     </div>

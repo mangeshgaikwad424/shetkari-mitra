@@ -71,21 +71,21 @@ export default function Navbar() {
       label: lang === "mr" ? "मंडी भाव" : "Mandi Prices",
       icon: "📊",
     },
-    {
-      to: "/crop",
-      label: t.crop || (lang === "mr" ? "पीक डॉक्टर" : "Crop Doctor"),
-      icon: "🌿",
-    },
-    {
-      to: "/crop-disease",
-      label: lang === "mr" ? "रोग शोध" : "Crop Disease",
-      icon: "🔬",
-    },
-    {
-      to: "/soil-health",
-      label: lang === "mr" ? "माती आरोग्य" : "Soil Health",
-      icon: "🌱",
-    },
+    // {
+    //   to: "/crop",
+    //   label: t.crop || (lang === "mr" ? "पीक डॉक्टर" : "Crop Doctor"),
+    //   icon: "🌿",
+    // },
+    // {
+    //   to: "/crop-disease",
+    //   label: lang === "mr" ? "रोग शोध" : "Crop Disease",
+    //   icon: "🔬",
+    // },
+    // {
+    //   to: "/soil-health",
+    //   label: lang === "mr" ? "माती आरोग्य" : "Soil Health",
+    //   icon: "🌱",
+    // },
     {
       to: "/community",
       label: lang === "mr" ? "समुदाय" : "Community",

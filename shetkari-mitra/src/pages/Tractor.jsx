@@ -23,9 +23,6 @@ const T = {
       { icon:"📅", title:"Easy Booking", sub:"Quick & simple process" },
       { icon:"🕐", title:"24/7 Support", sub:"We are here to help" },
     ],
-    listTitle: "List Your Tractor / Tool",
-    listSub: "Earn extra income by renting your equipment.",
-    listBtn: "List Now",
     nearTitle: "Near You", nearMap: "View on Map",
     modalTitle: "Book Equipment", modalDate: "Select Date",
     modalMsg: "Message (optional)", modalPh: "Any special requirements...",
@@ -73,9 +70,6 @@ const T = {
       { icon:"📅", title:"सोपे बुकिंग", sub:"जलद व साधी प्रक्रिया" },
       { icon:"🕐", title:"२४/७ मदत", sub:"आम्ही नेहमी मदतीस तयार" },
     ],
-    listTitle: "तुमचा ट्रॅक्टर / साधन सूचीबद्ध करा",
-    listSub: "तुमचे उपकरण भाड्याने देऊन अतिरिक्त उत्पन्न मिळवा.",
-    listBtn: "आता सूचीबद्ध करा",
     nearTitle: "तुमच्या जवळ", nearMap: "नकाशावर पाहा",
     modalTitle: "उपकरण बुक करा", modalDate: "तारीख निवडा",
     modalMsg: "संदेश (पर्यायी)", modalPh: "कोणत्याही विशेष आवश्यकता...",
@@ -107,6 +101,18 @@ const T = {
   },
 };
 
+// Unsplash image map for each item id
+const itemImages = {
+  t1: "https://images.unsplash.com/photo-1718470684824-3c53a74523bc?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+  t2: "https://images.unsplash.com/photo-1739444298506-7cff79291b81?q=80&w=1374&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+  t3: "https://images.unsplash.com/photo-1663731789776-a1d1eb27b16d?q=80&w=735&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+  t4: "https://images.unsplash.com/photo-1666011865321-20bc7e358121?q=80&w=1413&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+  a1: "https://media.istockphoto.com/id/578115276/photo/resting-plow.jpg?s=2048x2048&w=is&k=20&c=HqMjCePvWLCUWbv7b5jWHw2K3Rxry_zr2kNAMz_OIIU=",
+  a2: "https://media.istockphoto.com/id/1484751132/photo/aerial-view-of-tractor-as-dragging-a-sowing-machine-over-agricultural-field-farmland.jpg?s=2048x2048&w=is&k=20&c=pDTTWn0-bAtNSPdn6VWSDcqNSyKX5bYl7FH07AFbrVI=",
+  a3: "https://media.istockphoto.com/id/178887371/photo/garden-tiller-to-work.jpg?s=2048x2048&w=is&k=20&c=OneNSzm8wN2X8FtIQ2jhhwNUk-hjBWm4z_GV3YlHjlo=",
+  a4: "https://media.istockphoto.com/id/1400594508/photo/nozzle-of-the-tractor-sprinklers.jpg?s=2048x2048&w=is&k=20&c=vKSHdEwI4-7CUkfjSKKIIyBFlAp8UABPCCuav4qAPZg=",
+};
+
 export default function Tractor() {
   const { lang } = useContext(LanguageContext);
   const t = T[lang] || T.en;
@@ -127,9 +133,27 @@ export default function Tractor() {
 
   const Card = ({ item, emoji }) => (
     <div style={{ background:"#fff", border:"1px solid #e5e7eb", borderRadius:14, overflow:"hidden", boxShadow:"0 2px 8px rgba(0,0,0,0.06)" }}>
-      <div style={{ position:"relative", height:110, background:"linear-gradient(135deg,#dcfce7,#bbf7d0)", display:"flex", alignItems:"center", justifyContent:"center", fontSize:52 }}>
-        {emoji}
-        {item.badge && <span style={{ position:"absolute", top:8, left:8, background:item.badgeColor||"#16a34a", color:"#fff", fontSize:10, fontWeight:700, padding:"3px 8px", borderRadius:6 }}>{item.badge}</span>}
+      <div style={{ position:"relative", height:110, overflow:"hidden" }}>
+        <img
+          src={itemImages[item.id]}
+          alt={item.title}
+          style={{ width:"100%", height:"100%", objectFit:"cover", display:"block" }}
+          onError={e => {
+            e.target.style.display = "none";
+            e.target.parentNode.querySelector(".img-fallback").style.display = "flex";
+          }}
+        />
+        <div
+          className="img-fallback"
+          style={{ display:"none", position:"absolute", inset:0, background:"linear-gradient(135deg,#dcfce7,#bbf7d0)", alignItems:"center", justifyContent:"center", fontSize:52 }}
+        >
+          {emoji}
+        </div>
+        {item.badge && (
+          <span style={{ position:"absolute", top:8, left:8, background:item.badgeColor||"#16a34a", color:"#fff", fontSize:10, fontWeight:700, padding:"3px 8px", borderRadius:6, zIndex:1 }}>
+            {item.badge}
+          </span>
+        )}
       </div>
       <div style={{ padding:12 }}>
         <div style={{ fontSize:13, fontWeight:800, color:"#111827", marginBottom:2 }}>{item.title}</div>
@@ -140,7 +164,10 @@ export default function Tractor() {
           <span style={{ fontSize:11, color:"#374151" }}>👤 {item.owner}</span>
           <span style={{ color:"#f59e0b", fontSize:11, fontWeight:700 }}>⭐ {item.rating}</span>
         </div>
-        <button onClick={() => item.available && setModal(item)} style={{ width:"100%", padding:"8px", borderRadius:8, border:item.available?"1px solid #16a34a":"1px solid #d1d5db", background:"#fff", color:item.available?"#16a34a":"#9ca3af", fontSize:12, fontWeight:700, cursor:item.available?"pointer":"not-allowed" }}>
+        <button
+          onClick={() => item.available && setModal(item)}
+          style={{ width:"100%", padding:"8px", borderRadius:8, border:item.available?"1px solid #16a34a":"1px solid #d1d5db", background:"#fff", color:item.available?"#16a34a":"#9ca3af", fontSize:12, fontWeight:700, cursor:item.available?"pointer":"not-allowed" }}
+        >
           {item.available ? t.detailBtn : t.notAvail}
         </button>
       </div>
@@ -212,6 +239,7 @@ export default function Tractor() {
 
         {/* SIDEBAR */}
         <div>
+          {/* WHY RENT WITH US */}
           <div style={{ background:"#fff", border:"1px solid #e5e7eb", borderRadius:14, padding:18, marginBottom:16, boxShadow:"0 2px 8px rgba(0,0,0,0.05)" }}>
             <h3 style={{ fontSize:15, fontWeight:800, color:"#111827", marginBottom:14 }}>{t.whyTitle}</h3>
             {t.why.map((w,i) => (
@@ -222,15 +250,7 @@ export default function Tractor() {
             ))}
           </div>
 
-          <div style={{ background:"#15803d", borderRadius:14, padding:18, marginBottom:16, color:"#fff" }}>
-            <h3 style={{ fontSize:14, fontWeight:800, marginBottom:6 }}>{t.listTitle}</h3>
-            <p style={{ fontSize:12, opacity:0.8, marginBottom:14 }}>{t.listSub}</p>
-            <div style={{ display:"flex", alignItems:"center", justifyContent:"space-between" }}>
-              <button style={{ background:"#fff", color:"#15803d", border:"none", borderRadius:8, padding:"9px 18px", fontSize:13, fontWeight:700, cursor:"pointer" }}>{t.listBtn}</button>
-              <span style={{ fontSize:40 }}>🚜</span>
-            </div>
-          </div>
-
+          {/* NEAR YOU */}
           <div style={{ background:"#fff", border:"1px solid #e5e7eb", borderRadius:14, padding:18, boxShadow:"0 2px 8px rgba(0,0,0,0.05)" }}>
             <div style={{ display:"flex", justifyContent:"space-between", alignItems:"center", marginBottom:12 }}>
               <h3 style={{ fontSize:14, fontWeight:800, color:"#111827" }}>{t.nearTitle}</h3>
@@ -274,6 +294,7 @@ export default function Tractor() {
           </div>
         </div>
       )}
+
       <style>{`
         @media (min-width: 768px) {
           .tractor-main-grid { grid-template-columns: 1fr 280px !important; }
